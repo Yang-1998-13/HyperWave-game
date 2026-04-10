@@ -5,37 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HyperWave 超波 | 游戏资源空间站</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.png"> <!-- 网站图标 -->
+  <link rel="icon" href="logo.png">
 </head>
 <body>
-<!-- 顶部导航栏 -->
+
 <header class="hw-header">
   <div class="container">
-    <!-- 修复：图片LOGO，添加alt+错误处理+尺寸限制 -->
-<div class="logo">
-  <img 
-    src="logo.png" 
-    alt="HyperWave 超波" 
-    class="logo-img"
-    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-  >
-  <div class="logo-text-fallback">
-    <span class="logo-text">HYPERWAVE</span>
-    <span class="logo-sub">超波</span>
-  </div>
-</div>
-    <!-- 导航栏其他代码不变 -->
-  </div>
-</header>
     <div class="logo">
-      <img src="logo.png" alt="HyperWave 超波" class="logo-img">
+      <img src="logo.png" class="logo-img" alt="HyperWave">
     </div>
     <nav class="nav-menu">
       <a href="index.html" class="nav-link active">首页</a>
       <a href="speed.html" class="nav-link">网速测试</a>
-      <!-- 资源分类下拉菜单 -->
       <div class="dropdown">
-        <a href="#" class="nav-link dropdown-toggle">资源分类</a>
+        <a href="#" class="nav-link">资源分类</a>
         <div class="dropdown-menu">
           <a href="#" data-type="all">全部资源</a>
           <a href="#" data-type="动作">动作</a>
@@ -52,7 +35,6 @@
   </div>
 </header>
 
-<!-- 英雄区（保留中间大标题） -->
 <section class="hw-hero">
   <div class="container">
     <div class="hero-content">
@@ -66,7 +48,6 @@
   </div>
 </section>
 
-<!-- 分类导航（更新为新分类） -->
 <section class="hw-category">
   <div class="container">
     <button class="category-btn active" data-type="all">全部资源</button>
@@ -80,12 +61,10 @@
   </div>
 </section>
 
-<!-- 游戏资源列表 -->
 <main class="container">
   <div class="hw-game-grid" id="gameList"></div>
 </main>
 
-<!-- 底部 -->
 <footer class="hw-footer">
   <div class="container">
     <div class="footer-content">

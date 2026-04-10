@@ -8,24 +8,22 @@
   <link rel="icon" href="logo.png"> <!-- 网站图标 -->
 </head>
 <body>
-
 <!-- 顶部导航栏 -->
 <header class="hw-header">
   <div class="container">
     <!-- 修复：图片LOGO，添加alt+错误处理+尺寸限制 -->
-    <div class="logo">
-      <img 
-        src="./logo.png" 
-        alt="HyperWave 超波" 
-        class="logo-img"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      >
-      <!-- 备用文字LOGO（图片加载失败时显示） -->
-      <div class="logo-text-fallback">
-        <span class="logo-text">HYPERWAVE</span>
-        <span class="logo-sub">超波</span>
-      </div>
-    </div>
+<div class="logo">
+  <img 
+    src="logo.png" 
+    alt="HyperWave 超波" 
+    class="logo-img"
+    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+  >
+  <div class="logo-text-fallback">
+    <span class="logo-text">HYPERWAVE</span>
+    <span class="logo-sub">超波</span>
+  </div>
+</div>
     <!-- 导航栏其他代码不变 -->
   </div>
 </header>

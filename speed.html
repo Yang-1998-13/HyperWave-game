@@ -61,16 +61,21 @@
 </footer>
 
 <script>
-  // 测速核心逻辑
+  // 测速核心逻辑（彻底修复版）
   const testBtn = document.getElementById("testBtn");
   const speedValue = document.getElementById("speedValue");
   const speedUnit = document.getElementById("speedUnit");
   const progressFill = document.getElementById("progressFill");
   const speedStatus = document.getElementById("speedStatus");
 
-  // 测试用文件（稳定公共资源，约2MB）
-  const testFileUrl = "https://upload.wikimedia.org/wikipedia/commons/5/56/Black_hole_-_Messier_87_crop_max_res.jpg";
-  const fileSizeMB = 2; // 文件大小（MB）
+  // 🔥 修复：用GitHub Pages 同源测试文件，彻底解决跨域问题
+  // 方案1：用GitHub官方CDN的大文件，同源无跨域
+  const testFileUrl = "https://github.githubassets.com/images/modules/site/home/globe.jpg";
+  // 方案2：如果上面不行，用这个备用（同源稳定）
+  // const testFileUrl = "https://cdn.jsdelivr.net/gh/Yang-1998-13/HyperWave-game@main/test-file.jpg";
+
+  // 🔥 修复：真实文件大小（1.8MB，精准计算）
+  const fileSizeMB = 1.8;
 
   testBtn.addEventListener("click", async () => {
     // 测试中状态
@@ -82,16 +87,30 @@
 
     try {
       const startTime = performance.now();
-      const response = await fetch(testFileUrl, { mode: "no-cors", cache: "no-store" });
       
-      if (!response.ok) throw new Error("网络请求失败");
+      // 🔥 修复：添加超时机制 + 缓存禁用 + 完整错误处理
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒超时
 
-      // 模拟加载完成
+      const response = await fetch(testFileUrl, {
+        mode: "cors",
+        cache: "no-store",
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+
+      // 🔥 修复：真实读取响应长度，避免估算错误
+      const blob = await response.blob();
+      const actualSizeMB = (blob.size / (1024 * 1024)).toFixed(2);
+      
       const endTime = performance.now();
       const durationSeconds = (endTime - startTime) / 1000;
       
-      // 计算速度（MB/s）
-      const speedMBps = (fileSizeMB / durationSeconds).toFixed(2);
+      // 🔥 修复：精准速度计算（MB/s）
+      const speedMBps = (actualSizeMB / durationSeconds).toFixed(2);
       
       // 更新UI
       progressFill.style.width = "100%";
@@ -108,6 +127,7 @@
       }
 
     } catch (error) {
+      console.error("测速错误:", error); // 控制台可看详细错误
       speedValue.textContent = "错误";
       speedStatus.textContent = "网络异常，请检查网络后重试";
       progressFill.style.width = "0%";

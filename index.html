@@ -5,28 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HyperWave 超波 | 游戏资源空间站</title>
   <link rel="stylesheet" href="style.css">
-  <!-- 引入LOGO（替换成你自己的图片链接） -->
-  <link rel="icon" href="你的LOGO图片链接.ico">
+  <link rel="icon" href="logo.png"> <!-- 网站图标 -->
 </head>
 <body>
 
 <!-- 顶部导航栏 -->
 <header class="hw-header">
   <div class="container">
+    <!-- 替换为图片LOGO -->
     <div class="logo">
-      <span class="logo-text">HYPERWAVE</span>
-      <span class="logo-sub">超波</span>
+      <img src="logo.png" alt="HyperWave 超波" class="logo-img">
     </div>
     <nav class="nav-menu">
       <a href="index.html" class="nav-link active">首页</a>
       <a href="speed.html" class="nav-link">网速测试</a>
-      <a href="#" class="nav-link">资源分类</a>
-      <a href="#" class="nav-link">关于我们</a>
+      <!-- 资源分类下拉菜单 -->
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">资源分类</a>
+        <div class="dropdown-menu">
+          <a href="#" data-type="all">全部资源</a>
+          <a href="#" data-type="动作">动作</a>
+          <a href="#" data-type="冒险">冒险</a>
+          <a href="#" data-type="射击">射击</a>
+          <a href="#" data-type="休闲">休闲</a>
+          <a href="#" data-type="体育">体育</a>
+          <a href="#" data-type="竞速">竞速</a>
+          <a href="#" data-type="恐怖">恐怖</a>
+        </div>
+      </div>
+      <a href="about.html" class="nav-link">关于我们</a>
     </nav>
   </div>
 </header>
 
-<!-- 英雄区（带LOGO主视觉） -->
+<!-- 英雄区（保留中间大标题） -->
 <section class="hw-hero">
   <div class="container">
     <div class="hero-content">
@@ -40,14 +52,17 @@
   </div>
 </section>
 
-<!-- 分类导航 -->
+<!-- 分类导航（更新为新分类） -->
 <section class="hw-category">
   <div class="container">
     <button class="category-btn active" data-type="all">全部资源</button>
-    <button class="category-btn" data-type="单机">单机游戏</button>
-    <button class="category-btn" data-type="联机">联机游戏</button>
-    <button class="category-btn" data-type="MOD">游戏MOD</button>
-    <button class="category-btn" data-type="补丁">汉化补丁</button>
+    <button class="category-btn" data-type="动作">动作</button>
+    <button class="category-btn" data-type="冒险">冒险</button>
+    <button class="category-btn" data-type="射击">射击</button>
+    <button class="category-btn" data-type="休闲">休闲</button>
+    <button class="category-btn" data-type="体育">体育</button>
+    <button class="category-btn" data-type="竞速">竞速</button>
+    <button class="category-btn" data-type="恐怖">恐怖</button>
   </div>
 </section>
 
@@ -65,7 +80,7 @@
       <div class="footer-links">
         <a href="#">隐私政策</a>
         <a href="#">使用条款</a>
-        <a href="#">联系我们</a>
+        <a href="about.html">联系我们</a>
       </div>
     </div>
   </div>

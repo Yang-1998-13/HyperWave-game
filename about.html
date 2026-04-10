@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 - HyperWave 超波</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png">
+</head>
+<body>
+
+<!-- 顶部导航（和主页一致） -->
+<header class="hw-header">
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="HyperWave 超波" class="logo-img">
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="speed.html" class="nav-link">网速测试</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">资源分类</a>
+        <div class="dropdown-menu">
+          <a href="index.html" data-type="all">全部资源</a>
+          <a href="index.html" data-type="动作">动作</a>
+          <a href="index.html" data-type="冒险">冒险</a>
+          <a href="index.html" data-type="射击">射击</a>
+          <a href="index.html" data-type="休闲">休闲</a>
+          <a href="index.html" data-type="体育">体育</a>
+          <a href="index.html" data-type="竞速">竞速</a>
+          <a href="index.html" data-type="恐怖">恐怖</a>
+        </div>
+      </div>
+      <a href="about.html" class="nav-link active">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 关于我们主体 -->
+<main class="container about-container">
+  <div class="about-card">
+    <h2 class="about-title">关于 HyperWave 超波</h2>
+    <div class="about-content">
+      <h3>🚀 网站简介</h3>
+      <p>HyperWave 超波是一个专注于游戏资源分享的科幻风格平台，致力于为玩家提供最新、最全的单机/联机游戏、MOD、汉化补丁等资源。我们以「探索无限游戏宇宙」为理念，打造一个属于玩家的资源空间站。</p>
+      
+      <h3>🎮 资源分类</h3>
+      <ul>
+        <li><strong>动作类</strong>：包含黑神话：悟空、GTA5等热门动作游戏资源</li>
+        <li><strong>冒险类</strong>：塞尔达传说、艾尔登法环等冒险游戏资源</li>
+        <li><strong>射击类</strong>：CS2、使命召唤等射击游戏资源</li>
+        <li><strong>休闲类</strong>：星露谷物语、动物森友会等休闲游戏资源</li>
+        <li><strong>体育类</strong>：FIFA、NBA 2K等体育游戏资源</li>
+        <li><strong>竞速类</strong>：极限竞速、极品飞车等竞速游戏资源</li>
+        <li><strong>恐怖类</strong>：生化危机、寂静岭等恐怖游戏资源</li>
+      </ul>
+      
+      <h3>💡 网站特色</h3>
+      <ul>
+        <li>✅ 科幻炫酷UI设计，蓝紫渐变视觉体验</li>
+        <li>✅ 内置网速测试工具，帮你选择最佳下载节点</li>
+        <li>✅ 分类清晰，支持搜索筛选，快速找到所需资源</li>
+        <li>✅ 响应式设计，手机/电脑/平板完美适配</li>
+        <li>✅ 完全免费，无广告打扰，纯玩家向平台</li>
+      </ul>
+      
+      <h3>📞 联系我们</h3>
+      <p>如果您有任何问题、建议或资源需求，欢迎通过以下方式联系我们：</p>
+      <ul>
+        <li>📧 邮箱：contact@hyperwave.top（可替换为你的邮箱）</li>
+        <li>💬 反馈：网站底部「联系我们」表单（可后续添加）</li>
+        <li>🌐 社交：B站/微博 @HyperWave超波（可替换为你的账号）</li>
+      </ul>
+      
+      <h3>⚠️ 免责声明</h3>
+      <p>本网站所有资源均来源于网络，仅供学习交流使用，禁止商用。如有侵权，请联系我们删除，感谢您的理解与支持。</p>
+    </div>
+  </div>
+</main>
+
+<!-- 底部（和主页一致） -->
+<footer class="hw-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">HYPERWAVE 超波</div>
+      <p class="footer-desc">© 2025 HyperWave 超波 | 仅供学习交流使用，禁止商用</p>
+      <div class="footer-links">
+        <a href="#">隐私政策</a>
+        <a href="#">使用条款</a>
+        <a href="about.html">联系我们</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 关于我们页面专属样式
+  const aboutStyle = document.createElement("style");
+  aboutStyle.textContent = `
+    .about-container {
+      min-height: calc(100vh - 180px);
+      padding: 50px 0;
+    }
+    .about-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 209, 255, 0.3);
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 0 30px rgba(0, 209, 255, 0.15);
+    }
+    .about-title {
+      font-size: 36px;
+      font-weight: 900;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .about-content h3 {
+      font-size: 22px;
+      color: var(--accent-blue);
+      margin: 25px 0 15px;
+    }
+    .about-content p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    .about-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+    .about-content li {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.8;
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .about-content li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .about-card {
+        padding: 30px 20px;
+      }
+      .about-title {
+        font-size: 28px;
+      }
+    }
+  `;
+  document.head.appendChild(aboutStyle);
+
+  // 下拉菜单点击跳转首页筛选
+  document.querySelectorAll('.dropdown-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const type = link.dataset.type;
+      window.location.href = `index.html?type=${type}`;
+    });
+  });
+</script>
+
+</body>
+</html>

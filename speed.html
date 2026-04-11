@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- 顶部导航（和主页一致） -->
+<!-- 顶部导航（和主页一致，带渐变LOGO） -->
 <header class="hw-header">
   <div class="container">
     <div class="logo">
@@ -18,8 +18,20 @@
     <nav class="nav-menu">
       <a href="index.html" class="nav-link">首页</a>
       <a href="speed.html" class="nav-link active">网速测试</a>
-      <a href="#" class="nav-link">资源分类</a>
-      <a href="#" class="nav-link">关于我们</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">资源分类</a>
+        <div class="dropdown-menu">
+          <a href="index.html" data-type="all">全部资源</a>
+          <a href="index.html" data-type="动作">动作</a>
+          <a href="index.html" data-type="冒险">冒险</a>
+          <a href="index.html" data-type="射击">射击</a>
+          <a href="index.html" data-type="休闲">休闲</a>
+          <a href="index.html" data-type="体育">体育</a>
+          <a href="index.html" data-type="竞速">竞速</a>
+          <a href="index.html" data-type="恐怖">恐怖</a>
+        </div>
+      </div>
+      <a href="about.html" class="nav-link">关于我们</a>
     </nav>
   </div>
 </header>
@@ -54,28 +66,22 @@
       <div class="footer-links">
         <a href="#">隐私政策</a>
         <a href="#">使用条款</a>
-        <a href="#">联系我们</a>
+        <a href="about.html">联系我们</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  // 测速核心逻辑（彻底修复版）
+  // 测速核心逻辑（彻底修复跨域版）
   const testBtn = document.getElementById("testBtn");
   const speedValue = document.getElementById("speedValue");
   const speedUnit = document.getElementById("speedUnit");
   const progressFill = document.getElementById("progressFill");
   const speedStatus = document.getElementById("speedStatus");
 
-  // 🔥 修复：用GitHub Pages 同源测试文件，彻底解决跨域问题
-  // 方案1：用GitHub官方CDN的大文件，同源无跨域
+  // 用GitHub同源CDN资源，彻底解决跨域
   const testFileUrl = "https://github.githubassets.com/images/modules/site/home/globe.jpg";
-  // 方案2：如果上面不行，用这个备用（同源稳定）
-  // const testFileUrl = "https://cdn.jsdelivr.net/gh/Yang-1998-13/HyperWave-game@main/test-file.jpg";
-
-  // 🔥 修复：真实文件大小（1.8MB，精准计算）
-  const fileSizeMB = 1.8;
 
   testBtn.addEventListener("click", async () => {
     // 测试中状态
@@ -88,9 +94,9 @@
     try {
       const startTime = performance.now();
       
-      // 🔥 修复：添加超时机制 + 缓存禁用 + 完整错误处理
+      // 添加超时机制 + 缓存禁用
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒超时
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
 
       const response = await fetch(testFileUrl, {
         mode: "cors",
@@ -102,14 +108,14 @@
 
       if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
 
-      // 🔥 修复：真实读取响应长度，避免估算错误
+      // 真实读取响应长度，精准计算
       const blob = await response.blob();
       const actualSizeMB = (blob.size / (1024 * 1024)).toFixed(2);
       
       const endTime = performance.now();
       const durationSeconds = (endTime - startTime) / 1000;
       
-      // 🔥 修复：精准速度计算（MB/s）
+      // 精准速度计算（MB/s）
       const speedMBps = (actualSizeMB / durationSeconds).toFixed(2);
       
       // 更新UI
@@ -127,7 +133,7 @@
       }
 
     } catch (error) {
-      console.error("测速错误:", error); // 控制台可看详细错误
+      console.error("测速错误:", error);
       speedValue.textContent = "错误";
       speedStatus.textContent = "网络异常，请检查网络后重试";
       progressFill.style.width = "0%";
@@ -141,7 +147,7 @@
     }
   });
 
-  // 测速页专属样式（直接写在页面内，无需额外修改CSS）
+  // 测速页专属样式
   const speedStyle = document.createElement("style");
   speedStyle.textContent = `
     .speed-container {
@@ -217,14 +223,14 @@
       background: var(--accent-gradient);
       color: var(--text-primary);
       font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
+字体粗细：700;
+光标：指针;
+过渡：所有 0.3秒 线性;
     }
     .speed-btn:disabled {
-      background: #333;
-      cursor: not-allowed;
-      box-shadow: none;
+背景：#333;
+光标：不允许;
+阴影：无;
     }
     .speed-btn:hover:not(:disabled) {
       transform: translateY(-3px);
@@ -232,6 +238,15 @@
     }
   `;
   document.head.appendChild(speedStyle);
+
+  // 下拉菜单点击跳转首页筛选
+  document.querySelectorAll('.dropdown-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const type = 链接.dataset.type;
+      window.location.href = `index.html?type=${type}`;
+    });
+  });
 </script>
 
 </body>

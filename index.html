@@ -4,547 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>HyperWave 超波 · 游戏宇宙</title>
+    <!-- Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
-        }
-
-        body {
-            background-color: #05070a;
-            background-image: radial-gradient(circle at 30% 20%, rgba(100, 0, 255, 0.08) 0%, transparent 40%),
-                              radial-gradient(circle at 80% 80%, rgba(0, 180, 255, 0.05) 0%, transparent 50%);
-            color: #eef4ff;
-            min-height: 100vh;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.2rem 2rem;
-        }
-
-        /* ----- 导航栏 ----- */
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            padding: 0.8rem 0 1.5rem;
-            border-bottom: 1px solid rgba(120, 180, 255, 0.15);
-        }
-
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .logo h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #c084fc, #60a5fa, #38bdf8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px #3b82f680;
-        }
-
-        .logo span {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #a78bfa, #93c5fd);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-left: 4px;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.2rem;
-            font-weight: 500;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-            padding: 0.3rem 0;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: #a5b4fc;
-            border-bottom-color: #818cf8;
-            text-shadow: 0 0 10px #6366f1;
-        }
-
-        /* ----- Hero (搜索下移) ----- */
-        .hero {
-            margin: 4rem 0 2rem;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #c084fc, #60a5fa, #34d399);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
-            text-shadow: 0 0 20px #8b5cf680;
-        }
-
-        .hero p {
-            color: #9ca3af;
-            font-size: 1.2rem;
-            margin-bottom: 2.2rem;
-            letter-spacing: 0.3px;
-        }
-
-        .search-wrapper {
-            display: flex;
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(15, 25, 40, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1.5px solid #4f46e5;
-            border-radius: 60px;
-            padding: 0.2rem 0.2rem 0.2rem 1.8rem;
-            align-items: center;
-            box-shadow: 0 10px 30px -5px #00000080, 0 0 20px #3b82f640;
-            transition: box-shadow 0.2s;
-        }
-        .search-wrapper:focus-within {
-            border-color: #a78bfa;
-            box-shadow: 0 0 25px #8b5cf6;
-        }
-
-        .search-wrapper i {
-            color: #8b5cf6;
-            font-size: 1.2rem;
-        }
-
-        .search-wrapper input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 1rem 0.8rem;
-            font-size: 1.1rem;
-            color: white;
-            outline: none;
-        }
-
-        .search-wrapper input::placeholder {
-            color: #6b7280;
-            font-weight: 300;
-        }
-
-        .search-wrapper button {
-            background: linear-gradient(145deg, #4f46e5, #7c3aed);
-            border: none;
-            color: white;
-            padding: 0.75rem 2.2rem;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 0 15px #6366f1;
-            letter-spacing: 0.5px;
-            border: 1px solid #a78bfa;
-        }
-
-        .search-wrapper button:hover {
-            background: linear-gradient(145deg, #6366f1, #8b5cf6);
-            box-shadow: 0 0 25px #8b5cf6;
-            transform: scale(1.02);
-        }
-
-        /* 可替换背景区域（位于分类上方） */
-        .custom-bg-section {
-            margin: 3rem 0 1rem;
-            padding: 2.5rem 1rem;
-            border-radius: 40px;
-            background-image: var(--custom-bg, url('https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'));
-            background-size: cover;
-            background-position: center;
-            background-color: #0f1a2b;
-            border: 1px solid #4f46e5;
-            box-shadow: 0 0 30px #3b2e6b80;
-            position: relative;
-        }
-        .custom-bg-section::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 7, 10, 0.6);
-            border-radius: 40px;
-            backdrop-filter: blur(3px);
-            z-index: 0;
-        }
-        .custom-bg-section > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 分类区域 (上下间距扩大) */
-        .category-section {
-            margin: 3.5rem 0 2.5rem;
-        }
-
-        .cat-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
-
-        .cat-title i {
-            color: #a78bfa;
-            font-size: 1.6rem;
-        }
-        .cat-title span {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #c084fc, #93c5fd);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem 1rem;
-        }
-
-        .cat-btn {
-            background: rgba(20, 30, 50, 0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1.5px solid #4c51bf;
-            color: #cbd5e1;
-            padding: 0.7rem 1.8rem;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 10px #0000004d;
-        }
-
-        .cat-btn i {
-            margin-right: 8px;
-            color: #a5b4fc;
-        }
-
-        .cat-btn:hover {
-            background: #3730a3;
-            border-color: #818cf8;
-            color: white;
-            box-shadow: 0 0 15px #6366f1;
-        }
-
-        .cat-btn.active {
-            background: linear-gradient(145deg, #6d28d9, #4f46e5);
-            border-color: #c084fc;
-            color: white;
-            box-shadow: 0 0 20px #8b5cf6;
-        }
-
-        /* 游戏卡片网格 */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem 1.5rem;
-            margin: 2.5rem 0 3rem;
-        }
-
-        .game-card {
-            background: rgba(12, 20, 32, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1.5px solid #3b3f8c;
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.25s ease;
-            box-shadow: 0 15px 25px -8px #000000b3;
-            cursor: pointer;
-        }
-
-        .game-card:hover {
-            transform: translateY(-6px);
-            border-color: #8b5cf6;
-            box-shadow: 0 20px 30px -5px #000000e6, 0 0 25px #7c3aed80;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-            background: #0e1a26;
-            border-bottom: 1px solid #4c51bf;
-        }
-
-        .card-content {
-            padding: 1.3rem 1.2rem 1.4rem;
-        }
-
-        .game-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .game-title span:first-child {
-            background: linear-gradient(135deg, #e0e7ff, #b4c6fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .game-cat-badge {
-            background: #1e1e4f;
-            padding: 0.25rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #b4c6fc;
-            border: 1px solid #6d28d9;
-        }
-
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.2rem;
-        }
-
-        .detail-btn {
-            background: transparent;
-            border: 1.8px solid #6d28d9;
-            color: #c7d2fe;
-            padding: 0.5rem 1.4rem;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            backdrop-filter: blur(5px);
-            pointer-events: none;
-        }
-
-        .game-card:hover .detail-btn {
-            border-color: #a78bfa;
-            color: #ede9fe;
-            background: #4f46e520;
-        }
-
-        /* 模态框 */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.25s ease;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: #0b1322;
-            border: 2px solid #4f46e5;
-            border-radius: 36px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem 2.2rem;
-            box-shadow: 0 30px 50px #000000, 0 0 0 1px #6366f180, 0 0 60px #8b5cf640;
-            position: relative;
-            scrollbar-width: thin;
-            scrollbar-color: #6d28d9 #1e1e3f;
-        }
-
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 10px; }
-
-        .modal-close {
-            position: absolute;
-            top: 1.5rem; right: 1.8rem;
-            background: none;
-            border: none;
-            color: #a5b4fc;
-            font-size: 2.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-            line-height: 1;
-        }
-        .modal-close:hover { color: #c084fc; text-shadow: 0 0 20px #a78bfa; }
-
-        .modal-game-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #e0e7ff, #b4c6fc, #a78bfa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            padding-right: 2rem;
-        }
-
-        .detail-section { margin: 1.8rem 0; }
-        .detail-section h3 {
-            color: #a78bfa;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            border-left: 6px solid #8b5cf6;
-            padding-left: 1.2rem;
-        }
-
-        .sys-req {
-            background: #0f1a2b;
-            padding: 1.2rem 1.5rem;
-            border-radius: 20px;
-            border: 1px solid #4f46e5;
-            font-family: 'SF Mono', monospace;
-            white-space: pre-wrap;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-
-        .screenshots-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 10px;
-        }
-        .screenshot-thumb {
-            width: 160px;
-            height: 95px;
-            object-fit: cover;
-            border-radius: 14px;
-            border: 2px solid #6d28d9;
-            background: #0e1a26;
-            transition: 0.2s;
-        }
-
-        .download-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        .download-btn {
-            background: #1e1e4f;
-            border: 1.5px solid #7c3aed;
-            color: #e0e7ff;
-            padding: 0.7rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.2s;
-            box-shadow: 0 4px 8px #00000060;
-        }
-        .download-btn i { color: #a78bfa; font-size: 1.1rem; }
-        .download-btn:hover {
-            background: #2e1065;
-            border-color: #c084fc;
-            box-shadow: 0 0 20px #8b5cf6;
-            color: white;
-        }
-
-        .footer-note {
-            margin-top: 4rem;
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.95rem;
-            border-top: 1px solid #1f2937;
-            padding-top: 2.5rem;
-        }
-
-        .speedtest-container, .about-container { text-align: center; }
-        .speedtest-box {
-            background: #0f1a2b;
-            border-radius: 30px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid #4f46e5;
-        }
-        .speed-meter {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #c084fc, #60a5fa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .test-btn {
-            background: linear-gradient(145deg, #4f46e5, #7c3aed);
-            border: none;
-            color: white;
-            padding: 1rem 3rem;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 0 20px #6366f1;
-            margin: 1.5rem 0;
-            border: 1px solid #a78bfa;
-        }
-        .test-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .about-info {
-            background: #0f1a2b;
-            border-radius: 24px;
-            padding: 2rem;
-            border: 1px solid #4f46e5;
-            text-align: left;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px 0;
-            border-bottom: 1px solid #2d3a5e;
-        }
-        .no-link-msg { color: #9ca3af; font-style: italic; }
-    </style>
+    <!-- 外部样式表 (请确保 style.css 与此 HTML 文件在同一目录下) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
+    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="logo">
             <h1>HYPERWAVE</h1>
@@ -558,6 +26,7 @@
         </div>
     </nav>
 
+    <!-- Hero 区域 (搜索框下移) -->
     <div class="hero">
         <h2>探索无限游戏宇宙</h2>
         <p>获取最新资源、MOD与补丁 · 极速下载 一触即达</p>
@@ -568,9 +37,7 @@
         </div>
     </div>
 
-    <!-- 可替换背景区域（预留链接位置） -->
-    <div class="custom-bg-section"></div>
-
+    <!-- 分类导航 (上下间距已通过CSS扩大) -->
     <div class="category-section">
         <div class="cat-title">
             <i class="fas fa-tags"></i> <span>全部资源 · 分类筛选</span>
@@ -578,14 +45,16 @@
         <div class="category-list" id="categoryContainer"></div>
     </div>
 
+    <!-- 游戏卡片网格 -->
     <div id="gamesGrid" class="games-grid"></div>
 
+    <!-- 页脚 -->
     <div class="footer-note">
         <i class="fas fa-bolt" style="color: #8b5cf6;"></i> HyperWave 超波 · 每一次点击都是新次元
     </div>
 </div>
 
-<!-- 游戏详情模态框 -->
+<!-- 游戏详情模态框 (毛玻璃效果) -->
 <div class="modal-overlay" id="gameModal">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal('gameModal')"><i class="fas fa-times-circle"></i></button>
@@ -660,7 +129,7 @@
     (function(){
         "use strict";
 
-        // ---------- 完整游戏数据 (21款) 包含文档内所有详情 ----------
+        // ---------- 完整游戏数据 (21款，包含文档内所有详情) ----------
         const gamesData = [
             { id: 1, title: "与你在一起 免安装中文版", category: "恋爱", 
               description: "你扮演的主角James，因经营BnB的哥哥离奇失踪，被迫接下管理民宿的工作。除了要透过各种线索找出哥哥外，身为代理房东，还要协助其他几位美丽的房客，满足她们的需求，并帮助她们完成来这里的目的…透过情节的发展，在游戏中逐步与女房客们培养感情博得信任感，进而渐渐发展出愈来愈深入的亲密浪漫关系，但隐藏在背后的危机也随着剧情，慢慢的浮现…游戏特色：完整，有趣，意想不到的剧情。精致的全3D角色，使用动作捕捉系统制作生动细腻的表情动作。多重对话选项与简讯系统与女孩们培养感情。拟真的自然环境，精心设计的全3D开放世界。动态日夜与气候变化。与森林中的野兽搏斗，获得购买物品的金钱。与房客一同品酒，看看他们的酒力如何？为房客们换装，并为他们拍摄你想要的照片。", 
@@ -674,120 +143,120 @@
               screenshots: ["https://placehold.co/600x340/1e2a4a/818cf8?text=运行库1","https://placehold.co/600x340/1e2a4a/818cf8?text=运行库2"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G", baidu: "https://pan.baidu.com/s/1Tx6Z91ils2OwdMy3_oikmw?pwd=a56g", xunlei: null }, 
               cover: "https://placehold.co/400x220/1e2a4a/7c8ef0?text=运行库合集" },
-            { id: 3, title: "浣熊推币机 免安装中文版", category: "休闲", 
+            { id: 3, 标题: "浣熊推币机 免安装中文版", 类别: "休闲", 
               description: "《浣熊推币机》将经典街机推币机充满混乱的乐趣与肉鸽卡组构建类游戏的元素巧妙融合在一起。玩家可以将特制币与强力道具组合来触发令人爽到爆的联动效果。这是一场令人停不下来的多巴胺盛宴，一段不可预测、金币纷飞的刺激旅程！在冒险过程中发现各式各样的特殊代币！将种子币与水滴币组合在一起，就能在机台里长出一棵摇钱树。投下橘猫币可将鼠鼠币一网打尽，并额外获得大量奖券。想要更多分数？用加加币可全面提高你的得分。进度太慢了？发射核弹币引爆全场，一口气将所有代币炸向前方！解锁150种独特的道具，它们可大幅扭转对局走向。叠加倍率效果，生成带额外分数的代币，甚至在弹尽粮绝时猛摇整台机器，将代币都晃下来。为你最爱的代币镀上特殊镀层，强化效果，解锁更加疯狂的连击玩法。选择多位各具特色的角色，每位角色都拥有专属主题代币与独特玩法风格。6名可玩角色，各自有着独特的代币；150种具有特殊效果的不同代币；150种具有独特能力的强化道具；无尽模式，可带来无限可玩性；8个难度等级等你去征服。", 
-              systemReq: "最低配置\n操作系统: Windows 10, 11\n处理器: Intel Core i5-7500, AMD Ryzen 5 3600\n内存: 8 GB RAM\n显卡: Nvidia GeForce GTX 1060 3gb, AMD Radeon R9 Fury\n存储空间: 需要 1 GB 可用空间\n\n推荐配置\n操作系统: Windows10, 11\n处理器: Intel Core i5-7500, AMD Ryzen 5 3600 or better\n内存: 8 GB RAM\n显卡: Nvidia GeForce RTX 2060，AMD Radeon 5600XT or better\n存储空间: 需要 1 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机1","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机2","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机3","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机4","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/0624ed9c4b96", baidu: "https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh", xunlei: "https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9#" }, 
-              cover: "https://placehold.co/400x220/2e1f5c/fbbf24?text=浣熊推币机" },
-            { id: 4, title: "灰烬之国 免安装中文版", category: "动作", 
+              系统要求:最低配置操作系统Windows10,11处理器IntelCorei5-7500AMDRyzen53600内存8GB显卡NvidiaGeForceGTX1060 3GBRadeonR9Fury存储空间需要1GB可用空间，推荐配置操作系统Windows10，处理器：英特尔酷睿i5、AMD锐龙5或更高版本，内存GBRAM，显卡：英伟达RTX 2060、AMD 5600 XT或更高版本存储空间：需要1GB可用空间
+              截图: ["https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机1","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机2","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机3","https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机4",“https://placehold.co/600x340/3b2e5c/fbbf24?text=浣熊推币机5”], 
+              downloadLinks: { 夸克: "https://pan.quark.cn/s/0624ed9c4b96", 百度网盘: "https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh", 迅雷: "https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9#" }, 
+              封面: "https://placehold.co/400x220/2e1f5c/fbbf24?text=浣熊推币机" },
+            { id: 4, 标题: "灰烬之国 免安装中文版", 类别: "动作", 
               description: "《灰烬之国 Cinderia》是一款黑暗童话风的 Roguelite 动作游戏。魔女在燃烧世界的那一夜，古老的秩序随之崩塌，王国化为焦土，只剩灰烬在废墟间飘落。在余烬与阴影交织的废土上，一小群仍能抵抗腐蚀的人继续前行——他们能吞下黑魔法的残渣，却不被它完全支配。凭借这份危险的力量，你将于废墟间搏杀、成长，并逐步触及世界毁灭背后的真相。短剑斩暗，火炮裂敌，冰霜止息死亡。冒险者们各自背负着不同的命运，也拥有完全独特的战斗方式。黑魔法的余烬会腐蚀一切，可她未曾预料，这些力量会被你夺走，化为武器。余烬与魔卡的不同组合会重塑你的技能结构与连招节奏，使每一局都展现出完全不同的构筑路径。战斗，休整，然后再次启程。在破败的角落里，仍有温暖的火光等待着你。跌倒、受伤、失败，终究只是旅途的一部分。4名角色 x 每个角色独特的180+技能池。130+种装备，无穷无尽的搭配组合。数十种随机事件与房间类型，每局路线不同。持续更新，不断加入更多内容与玩法。", 
-              systemReq: "最低配置\n操作系统: Windows 10\n处理器: Intel I5-12600KF\n内存: 16,384 MB RAM\n显卡: NVIDIA GTX 1066\nDirectX 版本: 11\n存储空间: 需要 4096 MB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国1","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国2","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国3","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国4","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/dc61e6bca6a5", baidu: "https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4", xunlei: "https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub#" }, 
-              cover: "https://placehold.co/400x220/3b1f4a/c084fc?text=灰烬之国" },
-            { id: 5, title: "被勒索的主播 免安装中文版", category: "互动电影", 
+              系统要求: 最低配置 操作系统: Windows 10 处理器: Intel I5-12600KF 内存: 16,384 MB RAM 显卡: NVIDIA GTX 1066 DirectX 版本: 11 存储空间: 需要 4096 MB 可用空间, 
+              截图: ["https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国1","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国2","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国3","https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国4",“https://placehold.co/600x340/3b1f4a/d946ef?text=灰烬之国5”], 
+              下载链接: { 夸克: "https://pan.quark.cn/s/dc61e6bca6a5", 百度: "https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4", 迅雷: "https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub#" }, 
+              封面: "https://placehold.co/400x220/3b1f4a/c084fc?text=灰烬之国" },
+            { id: 5, 标题: "被勒索的主播 免安装中文版", 分类: "互动电影", 
               description: "屏幕那头，是主播惊恐无助的脸；屏幕这头，是她命运的唯一掌控者——你。一条突如其来的恐吓勒索信息，让这个直播夜晚瞬间坠入深渊。本作是一款全程采用真人演出的沉浸式互动电影游戏，你将亲身体验从天堂跌入地狱的惊魂时刻，感受令人窒息的悬疑氛围与情感冲击。主播的直播生涯甚至人生是否会就此终结？这一切，都始于你此刻的抉择。你并非旁观者，而是局中人。在这里，你的每一个动作都至关重要：实时决策：在超过50个关键决策点中，你的选择将直接左右剧情走向，与角色共情，体验抉择时的紧张与纠结。深度互动：仔细搜查场景中的每一个角落，与物品互动寻找蛛丝马迹；在突如其来的'快速反应事件'中果断操作，体验心跳加速的感觉。回溯关键记忆：在关键时刻回溯至她的过去，逐渐揭开她与身边所有人之间错综复杂的关系，挖掘隐藏在情感背后的真相碎片。在这个没有标准答案的迷局中，你将完全主宰故事的终章。你的调查、你的判断、你与他人的每一次对话互动，都将共同汇向5个截然不同的结局。是找出真凶完美破局，还是陷入更深的阴谋？主播的命运是悲是喜，完全由你书写。", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Windows 7 64-Bit\n处理器: 2.0 GHz\n内存: 4 GB RAM\nDirectX 版本: 11\n存储空间: 需要 20 GB 可用空间\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 64-Bit\n处理器: 2.2 GHz\n内存: 8 GB RAM\nDirectX 版本: 11\n存储空间: 需要 20 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/4a1f3a/f472b6?text=主播1","https://placehold.co/600x340/4a1f3a/f472b6?text=主播2","https://placehold.co/600x340/4a1f3a/f472b6?text=主播3","https://placehold.co/600x340/4a1f3a/f472b6?text=主播4","https://placehold.co/600x340/4a1f3a/f472b6?text=主播5"], 
+              系统要求: “最低配置 需要 64 位处理器和操作系统 操作系统: Windows 7 64 位 处理器: 2.0 GHz 内存: 4 GB RAM DirectX 版本: 11 存储空间: 需要 20 GB 可用空间  推荐配置 需要 64 位处理器和操作系统 操作系统: Windows 10 64 位 处理器: 2.2 GHz 内存: 8 GB RAM DirectX 版本: 11 存储空间: 需要 20 GB 可用空间", 
+              截图: ["https://placehold.co/600x340/4a1f3a/f472b6?text=主播1","https://placehold.co/600x340/4a1f3a/f472b6?text=主播2","https://placehold.co/600x340/4a1f3a/f472b6?text=主播3","https://placehold.co/600x340/4a1f3a/f472b6?text=主播4",“https://placehold.co/600x340/4a1f3a/f472b6?text=主播5”], 
               downloadLinks: { quark: "https://pan.quark.cn/s/b6490b0fad4e", baidu: "https://pan.baidu.com/s/1G7r6J9n1rskhOj5NxbeV-A?pwd=ka43", xunlei: null }, 
-              cover: "https://placehold.co/400x220/4a1f3a/f472b6?text=被勒索的主播" },
-            { id: 6, title: "太空中的妈妈被盗 免费下载", category: "冒险", 
+              封面: "https://placehold.co/400x220/4a1f3a/f472b6?text=被勒索的主播" },
+            { id: 6, 标题: "太空中的妈妈被盗 免费下载", 类别: "冒险", 
               description: "一个名叫空的男孩，他最好的朋友太郎，以及空的母亲光月，正乘坐着一艘航天飞机。在一次前往一颗近来人气飙升的度假星球的星际旅途中，三人兴致高昂，然而一场可怕的事情却发生了。与此同时，一个小型黑洞突然出现在航天飞机附近。包括身陷其中的三人在内的全体机组人员从此失踪。空醒来时，发现自己身处一座神秘而荒废的殖民地。现在，空必须在陌生的环境中摸索前行，与妈妈和太郎重新汇合，并搜集线索，找出逃离这个诡异之地的方法。空能否及时找到线索，在另一场灾难降临之前成功逃离这座废弃的殖民地呢？跟随空探索这座废弃的殖民地，寻找推进故事发展的线索。你将发现多种途径进入殖民地的不同区域，穿梭于各层楼面、管道以及坍塌的区域之间。不时与太郎和光月汇合，共同制定计划，采取必要行动以求生存并找到出路。随着剧情推进，你还将多次重返先前到过的地点，解锁更多场景内容。调查与探索：探索废弃的殖民地，从曾在此生活和工作的人们留下的物品中寻找线索。观察环境，修复损坏的机器，让它们助你前往此前被封锁或充满危险的区域。解开一些简单的谜题，即可进入被封锁的区域。意外邂逅：在这座废弃的殖民地里，除了索拉、光月和太郎之外，竟然没有一个活人。然而，他们似乎怎么也碰不上彼此。不过，这里或许还有其他幸存者？你会遇到幽灵、外星人，还是某种奇特的动物？探索每个角落，一探究竟吧。解谜与线索收集：当你探索各个区域时，将借助留下的线索或物品解锁新地点。游戏内会提供这些谜题的提示。奖励内容：完成游戏后，将解锁一段特别的故事供您游玩，可从主菜单中访问。", 
-              systemReq: "游戏大小: 300MB\n游戏版本: v1.4", 
-              screenshots: ["https://placehold.co/600x340/1e3a5f/38bdf8?text=太空1","https://placehold.co/600x340/1e3a5f/38bdf8?text=太空2","https://placehold.co/600x340/1e3a5f/38bdf8?text=太空3"], 
+              系统要求: 游戏大小: 300MB 游戏版本: v1.4, 
+              截图: ["https://placehold.co/600x340/1e3a5f/38bdf8?text=太空1","https://placehold.co/600x340/1e3a5f/38bdf8?text=太空2","https://placehold.co/600x340/1e3a5f/38bdf8?text=太空3"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/a63341762d27", baidu: "https://pan.baidu.com/s/1YFgYe3rxh8xrrY2crawD3g?pwd=hm36", xunlei: null }, 
-              cover: "https://placehold.co/400x220/1e3a5f/38bdf8?text=太空妈妈" },
+              封面: "https://placehold.co/400x220/1e3a5f/38bdf8?text=太空妈妈" },
             { id: 7, title: "钢铁雄心4 免费下载", category: "策略", 
               description: "在《钢铁雄心IV》中，掌控历史上最强大的战争机器吧！这是一款宏大的战略战争游戏，将考验你的战略才能与政治洞察力。重返二战时期，率领你的国家从零开始，打造工业强国，组建外交联盟，以高效的方式向意识形态对手发起战争。《钢铁雄心IV》不仅仅是一款历史模拟游戏。几乎你所做的每一个决定——从选择何处发动进攻以攻破'欧洲要塞'这类小决策，到决定是重建民主制度还是恢复早已被遗忘的君主制这类大决策——都会开启不同的历史走向。在《钢铁雄心4》中，你可以将军事战略规划细致到每一个铆钉——为你的军队设计师团模板，研发全新的生产方式与毁灭手段，制定工厂操作指南，并实现你的政治目标。几乎战争的每个环节都难逃你的掌控，你将带领所选国家度过人类历史上最黑暗的时刻。此次购买包含《钢铁之心IV》基础游戏以及四个扩展包：死亡或耻辱：聚焦于东欧和中欧的中等强国；携手共赴胜利：聚焦英联邦国家；唤醒猛虎：聚焦中国与日本；操炮手：聚焦美国的海军特色与另类历史走向。", 
-              systemReq: "游戏大小: 6.3GB\n游戏版本: v1.17.3", 
-              screenshots: ["https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心1","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心2","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心3","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心4"], 
+              系统要求: 游戏大小：6.3GB 游戏版本：v1.17.3, 
+              截图: ["https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心1","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心2","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心3","https://placehold.co/600x340/2e4a2e/6ee7b7?text=钢铁雄心4"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/f995c036371a", baidu: null, xunlei: null }, 
-              cover: "https://placehold.co/400x220/2e4a2e/6ee7b7?text=钢铁雄心4" },
-            { id: 8, title: "边境检察官 免费下载", category: "模拟", 
+              封面: "https://placehold.co/400x220/2e4a2e/6ee7b7?text=钢铁雄心4" },
+            { id: 8, 标题: "边境检察官 免费下载", 类别: "模拟", 
               description: "时间是1981年，作为一名年轻的军官学员，你被派往卡里卡特卡山区的一个边防哨所工作。进入阿卡里斯人民共和国受到党的严格管控，你的每一举一动都处于监视之中！边境局势日益紧张，就在一次行动中，你的战友不幸遇害......文件控制：每位游客都必须携带一套有效证件。哪怕是最微小的不符，也会导致被拒绝入境。随着时间推移，所需证件的数量会增加，错误也更难被发现。走私侦测：我们的情报部门会定期提供有关可疑司机的信息。请用紫外线手电筒搜查他们的车辆，然后使用合适的工具提取走私物品。任何数量的违禁品都不应越境！枪战：在某些情况下，你将被迫使用枪械。你的据点始终是奥贝兰科夫团伙袭击的目标，每次外勤任务都存在与敌方发生冲突的风险。警方追捕：绝望的走私犯可能试图逃离管控区。制止并逮捕他们，正是你的职责！购买并升级警车，以提升追捕效率。帖子管理：升级你的警察局，以增强防御能力并提升后续检查的效率。不过，请务必留意维持警局运营的成本不断上升。顺利完成检查、成功挫败走私以及成功实施干预行动，都是赚取现金的几种途径。特殊任务：时刻准备在紧急情况下挺身而出。破解犯罪谜题，支援战友，挫败血拳叛军。做出将决定阿卡里斯坦未来走向的抉择。", 
-              systemReq: "游戏大小: 9GB\n游戏版本: v10162025", 
-              screenshots: ["https://placehold.co/600x340/4a2e3a/f59e0b?text=边境1","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境2","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境3","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境4","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境5","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境6"], 
+              系统要求: 游戏大小: 9GB 游戏版本: v10162025, 
+              截图: ["https://placehold.co/600x340/4a2e3a/f59e0b?text=边境1","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境2","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境3","https://placehold.co/600x340/4a2e3a/f59e0b?text=边境4",“https://placehold.co/600x340/4a2e3a/f59e0b?text=边境5”,“https://placehold.co/600x340/4a2e3a/f59e0b?text=边境6”], 
               downloadLinks: { quark: "https://pan.quark.cn/s/d9acffb363e8", baidu: null, xunlei: null }, 
               cover: "https://placehold.co/400x220/4a2e3a/f59e0b?text=边境检察官" },
-            { id: 9, title: "宗门起源 免安装中文版", category: "角色扮演", 
+            { id: 9, title: 宗门起源 免安装中文版, category: 角色扮演, 
               description: "细腻的交互世界，探索广袤的森林、雪原和荒漠，一草一木都可被搜集和加工物资、制作和建设生活所需的一切。所以你需要做的就是复兴你的门派。游历中原世界，探索其他门派和远古遗迹，寻找绝世秘籍和神兵利器的线索。培养出色的弟子，指挥他们防御进攻，并对抗其它门派，给你带回奇珍异宝，或是任命他为你管理门派，或干脆利落的抢夺其它门派驻地，参与新的门派分舵建设。血肉之躯，真实之感：在荒芜人烟但充满生机的原始地貌中，弟子将饱受饥饿、睡眠、娱乐等需求的困扰，还要与风云多变的天气与自然灾害进行对抗，在风霜雪雨的侵袭下保持情绪，避免崩溃。尚未修炼武学的弟子需要谨慎面对一切，因为哪怕一只野兽都会在身体上留下终生的伤痕。然而身体也是武学的底蕴，当弟子掌握内功和招式，健康强壮的双臂、丹田，将为武学招式提供增益。江湖中更有极端之人将手臂、内脏等部位换为异兽之体，以求拥有更强大的威力。参悟武学，搭配招式：极致的武学是江湖之人最大的渴望，每个弟子习武之初需经历夯实基础、开辟丹田的苦熬之路，然后修炼梦寐以求的内功和招式。然而掌握武学只是第一步，勤学苦练也只是前进的基础。武学之路的进阶还需为弟子提供契合功法的房间摆设，搭配丹药和辅助之物，才能真正的一日千里。实战也是提升实力的重要过程，为弟子寻找更强大的内功并搭配招式，再换上神兵利器，才能真正独步武林。建设独属自己的门派：采集资源，研究建设、制造、艺术等工艺，选择契合门派发展的修炼之路。依靠建筑知识建设门派大殿、阁楼、亭台，与弟子日常生活设施结合，展现您对东方建筑的审美。同时也要合理设计储存空间，避免物资在不良环境和高温下损坏。为弟子提供合适的房间，鼓舞弟子士气。当然，别忘记建设门派的城墙和箭塔等防御工事，消灭贪婪的山贼和居心不良的江湖败类。竞争或合作：独自在江湖发展，或是寻觅值得依靠的盟友，通过与其它势力交流，您可以主导江湖中事件的发生，在进攻和防守中获得优势。您可以派出弟子进攻其它门派的驻地和城市，在争权夺利的血雨腥风中，通过武功高强的弟子正面征服。也可以借助审时度势的纵横之策，保护自身利益。或者藏在阴影中一次次教唆其它门派，坐看天下大乱狂笑。无论成为武林霸主，或八面玲珑，或幕后黑手，都由您来选择。", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Windows 7 64 bit\n处理器: AMD A10 7850K, Intel i3-2000\n内存: 8 GB RAM\n显卡: Geforce RTX 2060 , Radeon RX 5600 XT\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 64 bit\n处理器: AMD R3 3100, Intel i7 7700K\n内存: 16 GB RAM\n显卡: ,Geforce RTX 4060 , Radeon RX 7650", 
-              screenshots: ["https://placehold.co/600x340/2e4a3e/34d399?text=宗门1","https://placehold.co/600x340/2e4a3e/34d399?text=宗门2","https://placehold.co/600x340/2e4a3e/34d399?text=宗门3","https://placehold.co/600x340/2e4a3e/34d399?text=宗门4","https://placehold.co/600x340/2e4a3e/34d399?text=宗门5"], 
+              系统要求: “最低配置需要64 位处理器和操作系统操作系统: Windows7 64 位处理器: AMDA107850K，英特尔3-2000 内存: 8 GBRAM显卡: GeforceRTX2060，锐龙RX5600 XT推荐配置需要64 位处理器和操作系统操作系统: Windows10 64 位处理器: AMDR33100，英特尔i77700K内存：16GBRAM显卡：GeForceRTX4060，锐龙RX7650, 
+              截图: ["https://placehold.co/600x340/2e4a3e/34d399?text=宗门1","https://placehold.co/600x340/2e4a3e/34d399?text=宗门2","https://placehold.co/600x340/2e4a3e/34d399?text=宗门3","https://placehold.co/600x340/2e4a3e/34d399?text=宗门4",https://placehold.co/600x340/2e4a3e/34d399?text=宗门5], 
               downloadLinks: { quark: "https://pan.quark.cn/s/5d5e9b79727e", baidu: "https://pan.baidu.com/s/1F5nODS8Cx8sEHQ-PoAXMkQ?pwd=5gjs", xunlei: null }, 
-              cover: "https://placehold.co/400x220/2e4a3e/34d399?text=宗门起源" },
-            { id: 10, title: "纯白和弦（内置作弊菜单）", category: "卡牌", 
+              封面: "https://placehold.co/400x220/2e4a3e/34d399?text=宗门起源" },
+            { id: 10, title: “纯白和弦（内置作弊菜单）”, category: “卡牌”, 
               description: "《纯白和弦》是一款歌剧世界少女养成手游。《天鹅湖》《尼伯龙根的指环》《胡桃夹子》......无数与音乐有关的人物与景观交汇于维尔兰德，演化出一个神奇的幻想世界！庞大的世界观、细腻且具有差异化的角色设定、多元探索养成玩法，你将在寻找和发掘乐姬的路上领略到这些性格各异的少女们真正的魅力！强策略与灵活操作兼具的即时卡牌对战，直面强敌抑或步步为营由你决定！冒险旅途中的Roguelike元素，在随机事件抉择中寻找通往胜利的道路！那么现在，作为维尔兰德最后的希望，请你挥动手中的指挥棒，带领少女们向乐魇华丽宣战！", 
-              systemReq: "安卓手游，内置作弊菜单。", 
-              screenshots: ["https://placehold.co/600x340/4a1f5c/c084fc?text=纯白1","https://placehold.co/600x340/4a1f5c/c084fc?text=纯白2","https://placehold.co/600x340/4a1f5c/c084fc?text=纯白3"], 
+              系统要求: 安卓手游，内置作弊菜单。, 
+              截图: ["https://placehold.co/600x340/4a1f5c/c084fc?text=纯白1","https://placehold.co/600x340/4a1f5c/c084fc?text=纯白2","https://placehold.co/600x340/4a1f5c/c084fc?text=纯白3"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/25adef09202d", baidu: null, xunlei: null }, 
               cover: "https://placehold.co/400x220/4a1f5c/c084fc?text=纯白和弦" },
-            { id: 11, title: "饿殍：明末千里行（解锁完整版）", category: "文字冒险", 
+            { id: 11, title: “饿殍：明末千里行（解锁完整版）”, category: “文字冒险”, 
               description: "《饿殍:明末千里行》是一款明末旅行题材文字冒险游戏。玩家将扮演一名盗匪，运送四名女孩从华州到洛阳，并在途中查明真相、做出自己的选择。该游戏会涉及一些黑暗元素，但最终目的是呈现一个温馨热血的双向救赎故事，传递一种正向的力量和希望。", 
-              systemReq: "安卓手游，解锁完整版。", 
-              screenshots: ["https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍1","https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍2","https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍3"], 
+              系统要求: 安卓手游，解锁完整版。, 
+              截图: ["https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍1","https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍2","https://placehold.co/600x340/3b2e4a/d8b4fe?text=饿殍3"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/9be2f2f79a24", baidu: null, xunlei: null }, 
               cover: "https://placehold.co/400x220/3b2e4a/d8b4fe?text=饿殍" },
-            { id: 12, title: "大富翁 1-11合集", category: "休闲", 
+            {id:12,title“大富翁1-11合集”category“休闲”
               description: "大富翁游戏大全集，含大富翁1、大富翁2、大富翁3、大富翁4、大富翁5、大富翁6、大富翁7、大富翁8、大富翁9、大富翁10、大富翁11。强手棋类休闲游戏，在游戏中，你可以任意选择比赛地图、参赛角色和组队方式，创建自由比赛或者挑战比赛，通过投资地产、使用卡片等方式赚取金钱，最终取得比赛胜利。", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: 64-bit Windows 7+ (8,10,11)\n处理器: Intel i3-6100 / AMD Ryzen 3 1200\n内存: 8 GB RAM\n显卡: NVidia GeForce GTX 950 / AMD Radeon RX 550\nDirectX 版本: 11\n网络: 宽带互联网连接\n存储空间: 需要 5 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁1","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁2","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁3","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁4","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁5"], 
+              系统要求: “最低配置 需要 64 位处理器和操作系统 操作系统: 64位 Windows 7+ (8、10、11) 处理器: Intel i3-6100 / AMD Ryzen 3 1200 内存: 8 GB RAM 显卡: NVidia GeForce GTX 950 / AMD Radeon RX 550 DirectX 版本: 11 网络: 宽带互联网连接 存储空间: 需要 5 GB 可用空间", 
+              截图: ["https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁1","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁2","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁3","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁4","https://placehold.co/600x340/1e4a3e/fcd34d?text=大富翁5"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/0c0391e7919c", baidu: null, xunlei: null }, 
-              cover: "https://placehold.co/400x220/1e4a3e/fcd34d?text=大富翁合集" },
-            { id: 13, title: "千恋＊万花", category: "恋爱", 
+              封面: "https://placehold.co/400x220/1e4a3e/fcd34d?text=大富翁合集" },
+            { id: 13, 标题: “千恋＊万花”, 分类: “恋爱”, 
               description: "《千恋＊万花》是日本美少女游戏品牌Yuzusoft（柚子社）制作的一款和风恋爱题材作品。本作也是柚子社创立十周年的纪念作，在发售当年除展现出势如破竹的高人气外还赢取了大量奖项。除在2016年萌系游戏大赏中获得年度准大赏以及在Getchu所举办的2016年美少女游戏大赏中获得综合类排名第一之外，在剧本、系统、图像、音乐、影片、角色等各个奖项中也均有斩获。STEAM版本收录简体中文版、繁体中文版、英文版和日语版的内容并支持游戏内切换，并支持云存储、多达26个成就以及手柄控制等功能。", 
-              systemReq: "最低配置\n操作系统: Windows10/8/7/Vista\n处理器: Core2Duo 2.4Ghz\n内存: 2 GB RAM\n显卡: 256M\nDirectX 版本: 9.0c\n存储空间: 需要 10 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/4a1f4a/f472b6?text=千恋1","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋2","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋3","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋4","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋5"], 
+              系统要求: 最低配置 操作系统: Windows10/8/7/Vista 处理器: Core2Duo 2.4Ghz 内存: 2 GB RAM 显卡: 256M DirectX 版本: 9.0c 存储空间: 需要 10 GB 可用空间, 
+              截图: ["https://placehold.co/600x340/4a1f4a/f472b6?text=千恋1","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋2","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋3","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋4","https://placehold.co/600x340/4a1f4a/f472b6?text=千恋5"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/d06c56e05433", baidu: null, xunlei: null }, 
-              cover: "https://placehold.co/400x220/4a1f4a/f472b6?text=千恋＊万花" },
-            { id: 14, title: "中国式网游", category: "模拟", 
+              封面: "https://placehold.co/400x220/4a1f4a/f472b6?text=千恋＊万花" },
+            { id: 14, 标题: "中国式网游", 分类: "模拟", 
               description: "在这里，你会看到很多有着回忆杀的经典梗；在这里，你无需花真金白银就能体验网游氪金带来的乐趣；在这里，你能享受经典网游玩法，也能无痛体验氪金乐趣，每一次行为都是人生的转折点，也许，你上瘾的从来都不是游戏；最终，在现实和虚拟的思维斗争下，你也会看清国产网游的本质，认识国产网游的套路。超多结局 多周目：多结局，不同的体验！是你想猛氪当上皇城城主? 还是想稳健发育抱得美人归? 由你自己选择！单机玩法模拟网游的乐趣，这是你没有体验过的全新版本。用模拟人生的玩法带你体验国产网游。当进入游戏的那一刻，你励志放下一切去网游里大展身手，为的就是有朝一日当上网游里的皇城城主！然而，在你爽的同时，却也无意识跌入了无尽的深渊之中...充钱为王，白嫖为寇：游戏中648随意充；充完就能让你体验一刀999的快感；充完就可以去野外，去皇城，去竞技场，吊打不充钱的白嫖'玩家'；只要你愿意，随时都可以靠氪金走上游戏巅峰，成为榜一大哥，体验排行榜第一的快乐。氪佬体验，舍我其谁：游戏中能让你真实体验氪佬纵横天下，舍我其谁的感觉。在野外PK中，你可以一人挑百人，体验氪佬极致的PK爽感；在皇城PK战中，你也可以一人攻城或守城，一人挑一城，最终当上城主，睥睨天下；你必须接受所有帮派成员的膜拜，俯视着他们仰望你的样子；同时可以在世界聊天中，享受着所有屌丝一声声大哥的呼喊刷屏！", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Win10 win11\n处理器: I5-6500\n内存: 8 GB RAM\n显卡: GTX 660\n存储空间: 需要 5 GB 可用空间\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Win10 win11\n处理器: I5-10400\n内存: 16 GB RAM\n显卡: GTX 1060\n存储空间: 需要 5 GB 可用空间", 
+              系统要求: “最低配置 需要 64 位处理器和操作系统 操作系统: Win10、Win11 处理器: I5-6500 内存: 8 GB RAM 显卡: GTX 660 存储空间: 需要 5 GB 可用空间  推荐配置 需要 64 位处理器和操作系统 操作系统: Win10、Win11 处理器: I5-10400 内存: 16 GB RAM 显卡: GTX 1060 存储空间: 需要 5 GB 可用空间, 
               screenshots: ["https://placehold.co/600x340/3b4a2e/fbbf24?text=中国式1","https://placehold.co/600x340/3b4a2e/fbbf24?text=中国式2","https://placehold.co/600x340/3b4a2e/fbbf24?text=中国式3","https://placehold.co/600x340/3b4a2e/fbbf24?text=中国式4","https://placehold.co/600x340/3b4a2e/fbbf24?text=中国式5"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/96047cc5daa0", baidu: null, xunlei: null }, 
-              cover: "https://placehold.co/400x220/3b4a2e/fbbf24?text=中国式网游" },
-            { id: 15, title: "夏日美女：欧巴请和我恋爱吧！", category: "恋爱", 
+              封面: “https://placehold.co/400x220/3b4a2e/fbbf24?text=中国式网游” },
+            { id: 15, 标题: "夏日美女：欧巴请和我恋爱吧！", 分类: "恋爱", 
               description: "比盛夏更炽热的乡村浪漫，即将引爆！！背负巨额债务回到家乡的你——敏俊。本想安静地经营一家咖啡店，但现实却完全偏离了计划？！你以为乡村生活就会平淡无奇？那可就大错特错了。如同夏日微风般难以预测的她们纷纷闯入你的生活，好感、误会、嫉妒、突发肢体接触......每天都层出不穷。在日常琐事中，与她们交织的瞬间越来越多，不知不觉间，你的心也开始动摇。究竟让你脸红心跳的，是夏日的热浪？还是因为她们？你的一句话、每一个微小选择，都将改变故事与结局！在这个夏天里，一场让你心跳暴走的乡村罗曼史，就此展开序幕。女主角介绍：多娟——高利贷大姐头；芙莉——青梅竹马；艾拉——年上姐姐/芙莉的亲姐姐；彩瑟——里长千金；卷卷——咖啡店兼职生。游戏亮点：第一人称视角，享受压倒性沉浸感；更丰富的故事线与情感脉络；强化收集、选择与分支的乐趣；个性多样的夏日女主角们。", 
-              systemReq: "最低配置\n操作系统: Windows 10\n处理器: Intel Core i3\n内存: 4 GB RAM\n显卡: Discrete graphics card\nDirectX 版本: 11\n网络: 宽带互联网连接\n存储空间: 需要 40 GB 可用空间\n\n推荐配置\n操作系统: Windows 10/Windows 11\n处理器: Intel Core i5 or AMD equivalent or above\n内存: 4 GB RAM\n显卡: Discrete graphics card\nDirectX 版本: 11\n网络: 宽带互联网连接\n存储空间: 需要 40 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/4a2e4a/f472b6?text=夏日1","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日2","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日3","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日4","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/d597200fb40d?pwd=8XmX", baidu: "https://pan.baidu.com/s/1P147U7CNhFweeKPReSxx7Q?pwd=inip", xunlei: null }, 
-              cover: "https://placehold.co/400x220/4a2e4a/f472b6?text=夏日美女" },
-            { id: 16, title: "杀戮尖塔2 v0.99.1 单机+联机 送修改器", category: "卡牌", 
+              系统要求: “最低配置 操作系统: Windows 10 处理器: Intel Core i3 内存: 4 GB RAM 显卡: 独立显卡 DirectX 版本: 11 网络: 宽带互联网连接 存储空间: 需要 40 GB 可用空间  推荐配置 操作系统: Windows 10/Windows 11 处理器：英特尔酷睿i5或同等及以上AMD处理器 内存: 4 GB RAM 显卡: 独立显卡 DirectX 版本: 11 网络: 宽带互联网连接 存储空间：需要40 GB可用空间, 
+              截图: ["https://placehold.co/600x340/4a2e4a/f472b6?text=夏日1","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日2","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日3","https://placehold.co/600x340/4a2e4a/f472b6?text=夏日4",“https://placehold.co/600x340/4a2e4a/f472b6?text=夏日5”], 
+              downloadLinks: { 夸克: "https://pan.quark.cn/s/d597200fb40d?pwd=8XmX", 百度: "https://pan.baidu.com/s/1P147U7CNhFweeKPReSxx7Q?pwd=inip", 迅雷: 空 }, 
+              封面: "https://placehold.co/400x220/4a2e4a/f472b6?text=夏日美女" },
+            { id: 16, 标题: "杀戮尖塔2 v0.99.1 单机+联机 送修改器", 分类: "卡牌", 
               description: "高塔苏醒了！究极的卡牌肉鸽游戏再度归来！一千年来，高塔一直在沉睡。其中的秘密被深埋、恐怖被遗忘。如今，高塔再次开启，比以往更加饥饿与危险，吞噬每一个胆敢前来攀升的人。新的危险要求你使用更敏锐的策略、最无情的计算与毫不动摇的决心。克服高塔残酷的考验，发现藏在它顶峰的真相吧。你是会独自攀爬，还是征求其他冒险者同伴们的支持呢？不断变化的高塔：踏进已经焕然一新的高塔，这里是一个充满奇异与致命敌人的扭曲迷宫。试着熟悉全新的卡牌、遗物与药水，每一样都有可能改变你的整局游戏——或是带来危险的后果。和众多新老角色一起爬塔，每位角色都有自己的卡牌、动机和秘密。没有哪两次攀登会一模一样。不可预料的挑战与不断进化的策略等待着那些勇敢——或愚昧——的爬塔者们。独自攀登，或与盟友共同进退：是独自挑战高塔，还是最多4名玩家一起在全新的合作模式中共同面对高塔，决定在你！发现多人模式专属的卡牌、强大的团队连携、扛起你的队友们（或是被队友们扛着）去获得胜利！众多新老角色：从五名不同的角色中选择一位踏上爬塔的旅程，有一些角色对老玩家们会相当熟悉，而另两位则是全新登场。发现高塔的故事：高塔的历史和其中众多无论敌友的居民，如今你都可以用全新的方式发现和了解他们。", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 (64-bit)\n处理器: Dual-core 2.0 GHz\n内存: 4 GB RAM\n显卡: DirectX 12 or Vulkan compatible, 1 GB VRAM\n存储空间: 需要 4 GB 可用空间\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 (64-bit)\n处理器: Quad-core 3.0 GHz\n内存: 8 GB RAM\n显卡: DirectX 12 or Vulkan compatible, 2 GB VRAM\n存储空间: 需要 4 GB 可用空间\n\n联机说明: 启动 Steam 并登录，通过 SlayTheSpire2.exe 启动游戏。多人游戏 → 加入/创建。", 
-              screenshots: ["https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔1","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔2","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔3","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔4","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔5"], 
+              系统要求: “最低配置 需要 64 位处理器和操作系统 操作系统: Windows 10 (64位) 处理器: 双核 2.0 GHz 内存: 4 GB RAM 显卡: 支持 DirectX 12 或 Vulkan，1 GB 显存 存储空间: 需要 4 GB 可用空间  推荐配置 需要 64 位处理器和操作系统 操作系统: Windows 10 (64位) 处理器: 四核 3.0 GHz 内存：8 GB RAM 显卡：支持DirectX 12或Vulkan，2 GB VRAM 存储空间: 需要 4 GB 可用空间  联机说明：启动Steam并登录，通过SlayTheSpire2.exe启动游戏。多人游戏 → 加入/创建。, 
+              截图: ["https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔1","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔2","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔3","https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔4",“https://placehold.co/600x340/3a1f4a/c084fc?text=杀戮尖塔5”], 
               downloadLinks: { quark: "https://pan.quark.cn/s/de756bf7a5d2", baidu: "https://pan.baidu.com/s/18kuJm9OQUV3d4qviQzfP5Q?pwd=ds2a", xunlei: "https://pan.xunlei.com/s/VOoci-z0ZcV7JfjVnaBS8jvKA1?pwd=huvt#" }, 
-              cover: "https://placehold.co/400x220/3a1f4a/c084fc?text=杀戮尖塔2" },
-            { id: 17, title: "灾后修复师 v5.2.0.0", category: "模拟", 
+              封面: "https://placehold.co/400x220/3a1f4a/c084fc?text=杀戮尖塔2" },
+            { id: 17, 标题: "灾后修复师 v5.2.0.0", 分类: "模拟", 
               description: "作为一位专门应对自然灾害的重建专家，运用你的建筑机械重振当地经济。清理废墟，修复受损设备，重建被恶劣天气摧毁的道路和桥梁，还有更多任务等你完成！你掌舵一家灾后恢复公司，专注于修复被自然灾害摧毁的区域。诸多任务和重型机械等着你来恢复当地的工业：清理废墟、更换故障设备、修复被恶劣天气摧毁的道路和桥梁、派遣资源车队生产重建材料，等等！体验由MudRunner和SnowRunner团队Saber Interactive打造的全新模拟引擎。每件物体都有其真实的物理特性，需考虑其质量和体积。与沙土、木材和沥青等元素互动。通过修建道路来改变地形，助力车辆顺利前行。每台机器都有其独特的操作方式。用推土机清理障碍，用重型运输车运载多辆车辆，或用固定起重机或门式起重机吊装集装箱和设备。用铺缆机将工厂重新接入电网，铺设热沥青，再用压路机将其压平，打造平坦道路。随着剧情推进，解锁超过40种工程车辆。访问车库，定制你的车辆，使用公司标志和专属颜色重新喷漆。灾难让许多地区陷入混乱，你是最后的希望，来挑战极限吧！无论是在山脉、沙漠，还是海岸，你的专业技能在全球各地都需要发挥！探索8张独特的地图，每张4平方公里，各自拥有独特的生物群落和建筑。选择路线，穿越废弃的工厂、被淹没的大坝，或废弃的太阳能场。搜寻每个角落，完成目标，获取新合同，赚取更多资金和经验。收集木材、钢铁、水泥残骸，并在回收厂将它们转化为重建材料，每一块废墟都可为重建做出贡献！为工厂和沙石场提供资源，进行大规模生产。作为运营经理，规划运输卡车的路线，确保它们顺利通过障碍物！RoadCraft的世界提供了丰富的活动，为什么不和朋友一起完成呢？设置最多4人的合作模式。分配任务，或共同专注于一个目标。结合你的力量和创意，找到解决方案，即使是最棘手的问题，也不在话下。", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 (18362 min)/11 64-bit\n处理器: AMD Ryzen 5 1500X / Intel Core i5-8400\n内存: 8 GB RAM\n显卡: AMD Radeon RX 590 / Nvidia GeForce GTX 1060 / Intel ARC A580\n存储空间: 需要 40 GB 可用空间\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 (18362 min)/11 64-bit\n处理器: AMD Ryzen 7 5800X / Intel Core i5-12600K\n内存: 16 GB RAM\n显卡: AMD Radeon RX 6600 XT / Nvidia GeForce RTX 3060 / Intel ARC B580\n存储空间: 需要 40 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后1","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后2","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后3","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后4","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV", baidu: "https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim", xunlei: null }, 
-              cover: "https://placehold.co/400x220/1e4a5f/38bdf8?text=灾后修复师" },
+              系统要求: “最低配置 需要 64 位处理器和操作系统 操作系统: Windows 10 (18362 min)/11 64位 处理器: AMD Ryzen 5 1500X / Intel Core i5-8400 内存: 8 GB RAM 显卡: AMD Radeon RX 590 / Nvidia GeForce GTX 1060 / Intel ARC A580 存储空间: 需要 40 GB 可用空间  推荐配置 需要 64 位处理器和操作系统 操作系统: Windows 10 (18362 min)/11 64位 处理器: AMD Ryzen 7 5800X / Intel Core i5-12600K 内存: 16 GB RAM 显卡: AMD Radeon RX 6600 XT / Nvidia GeForce RTX 3060 / Intel ARC B580 存储空间: 需要 40 GB 可用空间", 
+              截图: ["https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后1","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后2","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后3","https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后4",“https://placehold.co/600x340/1e4a5f/38bdf8?text=灾后5”], 
+              downloadLinks: { 夸克: "https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV", 百度: "https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim", 迅雷: 空 }, 
+              封面: "https://placehold.co/400x220/1e4a5f/38bdf8?text=灾后修复师" },
             { id: 18, title: "攀爬动物：在一起", category: "动作", 
               description: "Climber Animals: Together是一款为1至8名玩家提供的令人兴奋且具有挑战性的跑酷体验。在这款游戏中，玩家试图找到一条通过充满动态和挑战性的障碍物世界的道路。每个障碍物都考验玩家的策略、速度和技巧。在独特且设计生动的课程上，你的目标是通过与朋友们肩并肩或对抗赛跑达到顶部。游戏最重要的特性之一是，每次跌落，你的进度都会丢失，玩家必须从头开始。这样在每个关卡开始时为所有玩家创建了一个平等的起点，同时也提高了游戏的难度等级。这允许每次重试关卡时探索不同的策略和路径。玩家需要保持平衡并克服障碍物以达到顶部。在这个过程中，玩家使用他们的反射、速度和战略思维技能是很重要的。玩家可以与朋友合作或挑战他们，通过这个充满挑战和乐趣的课程。Climber Animals: Together提供了一个有趣且富有挑战性的课程体验，吸引所有年龄组，为你与朋友们打开享受欢乐时刻的大门。每次攀登都是新的冒险，每次跌落都是尝试新事物的另一个机会。在这段激动人心的旅程中，躲避旋转的锤子，闪避拳击手套，并在旋转的杆上保持平衡！", 
-              systemReq: "最低配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 / 64-bit\n处理器: Intel Core i5-5200U or higher/equivalent\n内存: 8 GB RAM\n显卡: 2GB VRam or higher.\n网络: 宽带互联网连接\n存储空间: 需要 500 MB 可用空间\n\n推荐配置\n需要 64 位处理器和操作系统\n操作系统: Windows 10 / 64-bit or higher\n处理器: Intel Core i5-5200U or higher/equivalent\n内存: 8 GB RAM\n显卡: 2GB VRam or higher.\n网络: 宽带互联网连接\n存储空间: 需要 500 MB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬1","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬2","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬3","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬4","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/849049828092?pwd=Azet", baidu: "https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm", xunlei: "https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh#" }, 
+              系统要求:“最低配置\n需要 64 位处理器和操作系统操作系统: Windows 10 / 64-bit处理器: Intel Core i5-5200U 或更高/同等型号内存: 8 GB RAM显卡: 2GB VRam 或更高。网络: 宽带互联网连接存储空间: 需要 500 MB 可用空间\n\n推荐配置操作系统: Windows 10 / 64位或更高版本存储空间: 需要500 MB可用空间,
+              截图: ["https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬1","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬2","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬3","https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬4",“https://placehold.co/600x340/2e5c3b/6ee7b7?text=攀爬5”], 
+              下载链接: { 夸克: "https://pan.quark.cn/s/849049828092?pwd=Azet", 百度: "https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm", 迅雷: "https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh#" }, 
               cover: "https://placehold.co/400x220/2e5c3b/6ee7b7?text=攀爬动物" },
-            { id: 19, title: "美女，请别影响我成仙", category: "互动电影", 
+            { id: 19, title: “美女，请别影响我成仙”, 类别: “互动电影”, 
               description: "修仙，还是羞仙？你，林凡，千年难遇的纯阳灵根拥有者，鹤幻宗唯一的男修，本该是修仙界的天选之子，直到你发现，真正的'渡劫'不是雷罚，而是和宗门小姐姐们的情有千千劫。不靠谱的师父、阴晴不定的大师姐、乱我心智的二师姐、古灵精怪的师侄、毒茶美人般的圣女，还有弱不禁风的小嫂嫂......在第一人称视角的游戏中，你将在'癫、笑、戏、谑'中开启自己的修仙冒险。既要突破境界、御剑成仙；又要守护纯阳、把根留住！角色介绍：师父·净无欲、大师姐·蓝云柔、二师姐·白绾绾、三师姐·雷霄、师侄·闻人澜珂、掩月门圣女·尹瓶儿、豆腐西施·潘素琴。你能在美女与雷劫的双重考验下，成功飞升吗？产品特色：沉浸式第一视角修仙；仙侠场景手工搭建；多分支剧情，你的选择决定结局；玩法多样，笑泪交织：QTE渡劫、蓄力对波、修罗场抉择、隐藏彩蛋。", 
-              systemReq: "最低配置\n操作系统: Windows 10\n处理器: Intel Core i3-4590 及以上处理器\n内存: 4 GB RAM\n显卡: 独立显卡\nDirectX 版本: 11\n网络: 宽带互联网连接\n存储空间: 需要 25 GB 可用空间\n\n推荐配置\n操作系统: Windows 10/Windows 11\n处理器: Intel Core i5-4590 及以上处理器\n内存: 8 GB RAM\n显卡: 独立显卡\nDirectX 版本: 11\n网络: 宽带互联网连接\n存储空间: 需要 25 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/5c2e5c/f472b6?text=美女1","https://placehold.co/600x340/5c2e5c/f472b6?text=美女2","https://placehold.co/600x340/5c2e5c/f472b6?text=美女3","https://placehold.co/600x340/5c2e5c/f472b6?text=美女4","https://placehold.co/600x340/5c2e5c/f472b6?text=美女5"], 
+              系统要求: 最低配置 操作系统: Windows 10 处理器: Intel Core i3-4590 及以上处理器 内存: 4 GB 内存显卡: 独立显卡 DirectX 版本: 11 网络: 宽带互联网连接 存储空间: 需要 25 GB 可用空间  推荐配置 操作系统: Windows 10/Windows 11 处理器：Intel Core i5-4590 及以上处理器 内存：8 GB 内存显卡: 独立显卡 DirectX 版本: 11 网络: 宽带互联网连接 存储空间：需要 25 GB 可用空间, 
+              截图: ["https://placehold.co/600x340/5c2e5c/f472b6?text=美女1","https://placehold.co/600x340/5c2e5c/f472b6?text=美女2","https://placehold.co/600x340/5c2e5c/f472b6?text=美女3","https://placehold.co/600x340/5c2e5c/f472b6?text=美女4",“https://placehold.co/600x340/5c2e5c/f472b6?text=美女5”], 
               downloadLinks: { quark: "https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG", baidu: null, xunlei: null }, 
-              cover: "https://placehold.co/400x220/5c2e5c/f472b6?text=美女别影响" },
-            { id: 20, title: "死亡搁浅2：冥滩之上 v1.0.46.0", category: "动作冒险", 
+              封面: "https://placehold.co/400x220/5c2e5c/f472b6?text=美女别影响" },
+            { id: 20, 标题: "死亡搁浅2：冥滩之上 v1.0.46.0", 分类: "动作冒险", 
               description: "颠覆传统题材的游戏体验迎来全面升级，传奇游戏制作人小岛秀夫为您带来动人心弦的续作。为了让这款游戏成功登陆PC平台，KOJIMA PRODUCTIONS与Nixxes Software通力合作，共同打造出这款广受好评的主机游戏的终极版本。奇特又逼真的世界：在《DEATH STRANDING 2: ON THE BEACH》广阔的开放世界中，无数地形环境迥异的地区相互无缝连接，不断流逝的时间、变幻莫测的天气和自然共同塑造出变化多端的景观，带来重重挑战。灵活多变的升级战斗：山姆在执行任务途中将遇到层层阻碍。您可以正面交锋，也可以悄然绕开敌人，或者完全避开危险区域。如何应对，由您选择。引人入胜的深刻故事：在原作《DEATH STRANDING》事件发生11个月后，与山姆和他的伙伴们再度开启新旅程，拯救濒临灭亡的人类，探究一个挥之不去的问题：连接是必要的吗？探索UCA之外的世界：与山姆一起翻开旅程的新篇章，努力将澳大利亚接入开罗尔网络。穿行于昼夜交替的鲜活环境中，历经地震、沙尘暴、森林火灾等自然灾害，以及让所接触的一切顷刻老化的'时间雨'。要想穿越这片危险之地，您需要建造新型基础设施、驾驭专业装备，还要迎战（或躲避）游荡在这个破败世界的异界生物。为未来而战：迎战神秘莫测的机甲士兵、前所未见的BT和新型头目，不断挑战山姆的极限。为每趟旅途做准备时，您可以制造机枪、霰弹枪、榴弹发射器等武器，用于应对途中的危险。您也可以选择利用全息诱饵、远程装备，或施展无声击倒技巧进行潜行，全然避免正面交锋。山姆可以借助APAS强化功能学习新技能，提升生存几率，比如提高武器射速，或者通过减少移动噪声来保持隐蔽。全澳洲携手共进：《Death Stranding》经典社交羁绊系统重磅回归，助力全球玩家进行异步连接。您在游戏内的行动会影响其他玩家与游戏世界的交互，反之亦然。积极与派送员同行建立连接、相互合作，为他们的旅途提供帮助。为实用的桥梁点赞、向社区项目捐赠资源、将户外装备存入共享储物柜，或者在碰上其他派送员掉落的货物时代为完成派送任务。为其他玩家的旅途提供援助时，您的声誉也会提升，进而解锁宝贵资源与新装备。PC功能：全面融合AMD FSR、Intel XeSS及NVIDIA DLSS图像升频和帧生成技术；无限制帧率与自定义画面基准；超宽银幕支持；自定义操控方式；DualSense®集成。", 
-              systemReq: "最低配置\n操作系统: Windows 10/11 Version 1909 or newer\n处理器: Intel Core i3-10100, AMD Ryzen 3 3100\n内存: 16 GB RAM\n显卡: NVIDIA GeForce GTX 1660, AMD Radeon RX 5500 XT 8GB\n存储空间: 需要 150 GB 可用空间\n\n推荐配置\n操作系统: Windows 10/11 Version 1909 or newer\n处理器: Intel Core i7-11700, AMD Ryzen 7 5700X\n内存: 16 GB RAM\n显卡: NVIDIA GeForce RTX 3070, AMD Radeon RX 6800\n存储空间: 需要 150 GB 可用空间", 
-              screenshots: ["https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅1","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅2","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅3","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅4","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅5"], 
+              系统要求: “最低配置 操作系统: Windows 10/11 1909版或更高版本 处理器: Intel Core i3-10100，AMD Ryzen 3 3100 内存: 16 GB RAM 显卡: NVIDIA GeForce GTX 1660，AMD Radeon RX 5500 XT 8GB 存储空间: 需要150 GB可用空间  推荐配置 操作系统: Windows 10/11 1909版或更高版本 处理器: 英特尔酷睿i7-11700，AMD锐龙7 5700X 内存: 16 GB RAM 显卡: 英伟达 GeForce RTX 3070，AMD Radeon RX 6800 存储空间: 需要 150 GB 可用空间, 
+              截图: ["https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅1","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅2","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅3","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅4","https://placehold.co/600x340/1e3a5f/38bdf8?text=死亡搁浅5"], 
               downloadLinks: { quark: "https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ", baidu: "https://pan.baidu.com/s/115XFfRljOkec_Ztw__4Fng?pwd=9ycg", xunlei: null }, 
-              cover: "https://placehold.co/400x220/1e3a5f/38bdf8?text=死亡搁浅2" },
+              封面: "https://placehold.co/400x220/1e3a5f/38bdf8?text=死亡搁浅2" },
             { id: 21, title: "刮个爽 Build.22395563", category: "休闲", 
               description: "《刮个爽》是一款爽感十足的刮刮乐游戏，在这里你好运在手，闪闪发光的财富只需轻轻一刮，一切易如反掌。不断收集各类刮刮乐，每一种都有其独特的机制、惊喜，甚至偶尔带点'小坑'。刮开一张张彩票，找出稀有符号，扭转运势，一路冲向巨额奖励。解锁'自动刮刮机'——你那位永不疲倦的机械伙伴，它会替你不断刮开卡片、找到奖励。游戏最终将变成一台全自动刮刮得奖机，你只需轻松坐等奖金一路狂飙、突破天际。随着财富不断增长，你将解锁各种升级，让好运彻底站在你这一边：更高的中奖率与更爽快的返奖；更快、更轻松的刮奖体验；拥有独特规则的新型刮刮乐彩票。不过，高回报总是伴随着高风险。有些刮刮乐会用惊人的巨额奖励引诱你，但稍有不慎，也会面临残酷的惩罚。有些刮刮乐提供稳定收入......但有些也可能让你直接崩盘。你会理智成熟地稳健经营，还是像沉浸在霓虹闪烁赌场里的赌徒一样彻底沉沦？当你准备迎接更多疯狂时，可以选择'转生'，重开这一局，收集'大奖点数'，并将其投入永久能力升级，打造全新策略流派。打造属于你的幸运引擎：细水长流？瞬间爆炸？还是彻底放飞自我？《刮个爽》是一款危险又令人上头的成长型赌场游戏。每一次刮奖，都是一次微妙的多巴胺刺激；而每一局游戏，都可能让你直冲超级大奖！", 
-              systemReq: "解压即玩，无特殊配置要求。", 
-              screenshots: ["https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽1","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽2","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽3","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽4","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽5"], 
-              downloadLinks: { quark: "https://pan.quark.cn/s/09160ad8e6b7", baidu: "https://pan.baidu.com/s/1s0YedT0oXPmlxwmsJw58jg?pwd=8gtu", xunlei: null }, 
-              cover: "https://placehold.co/400x220/4a3b1e/fbbf24?text=刮个爽" }
+              系统要求: “解压即玩，无特殊配置要求。”, 
+              截图: ["https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽1","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽2","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽3","https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽4",“https://placehold.co/600x340/4a3b1e/fbbf24?text=刮个爽5”], 
+              downloadLinks: { 夸克: "https://pan.quark.cn/s/09160ad8e6b7", 百度: "https://pan.baidu.com/s/1s0YedT0oXPmlxwmsJw58jg?pwd=8gtu", 迅雷: 空 }, 
+              封面: "https://placehold.co/400x220/4a3b1e/fbbf24?text=刮个爽" }
         ];
 
         // DOM 元素
@@ -807,11 +276,11 @@
 
         function openModal(modal) {
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            文档.主体.样式.溢出 = '隐藏';
         }
 
-        document.getElementById('speedTestBtn').addEventListener('click', (e) => { e.preventDefault(); openModal(speedtestModal); });
-        document.getElementById('aboutBtn').addEventListener('click', (e) => { e.preventDefault(); openModal(aboutModal); });
+        document.getElementById('speedTestBtn')addEventListener('click', e => {preventDefault();openModal('speedtestModal');});
+        document.getElementById('aboutBtn')addEventListener('click', e => {preventDefault();openModal(aboutModal);});
         document.getElementById('resourceCatBtn').addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.category-section').scrollIntoView({behavior:'smooth'}); });
 
         [gameModal, speedtestModal, aboutModal].forEach(m => {
@@ -833,18 +302,18 @@
             });
         }
 
-        function getFilteredGames(){
-            return gamesData.filter(g=> (currentCategory==='全部'||g.category===currentCategory) && (g.title.toLowerCase().includes(currentSearchTerm)||g.description.toLowerCase().includes(currentSearchTerm)));
+        函数 getFilteredGames(){
+            返回 gamesData.筛选(g=> (当前类别==='全部'||g.类别===当前类别) && (g.标题.小写().包含(当前搜索词)||g.描述.小写().包含(当前搜索词)));
         }
 
         function renderGames(){
             const filtered = getFilteredGames();
-            if(!filtered.length){ gridEl.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#9ca3af;"><i class="fas fa-gamepad" style="font-size:3rem;opacity:0.5;"></i><p>没有找到游戏</p></div>`; return; }
+            if(!filtered.length){ gridEl.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#9ca3af;"><i class="fas fa-gamepad" style="font-size:3rem;opacity:0.5;"></i><p>未找到游戏</p></div>`; return; }
             gridEl.innerHTML = filtered.map(g=>`
                 <div class="game-card" data-game-id="${g.id}">
                     <img class="card-img" src="${g.cover||g.screenshots[0]}" alt="${g.title}">
                     <div class="card-content">
-                        <div class="game-title"><span>${g.title}</span><span class="game-cat-badge"><i class="fas fa-tag"></i> ${g.category}</span></div>
+<div class="game-title"><span>${g.标题}</span><span class="game-cat-badge"><i class="fas fa-tag"></i>${g.分类}</span></div>
                         <div class="card-actions"><span class="detail-btn">查看详情 <i class="fas fa-chevron-right"></i></span><i class="fas fa-download" style="color:#a78bfa;"></i></div>
                     </div>
                 </div>
@@ -853,22 +322,22 @@
                 card.addEventListener('click',(e)=>{
                     const id = parseInt(card.dataset.gameId);
                     const game = gamesData.find(g=>g.id===id);
-                    if(game) openGameModal(game);
+                    如果(游戏) 打开游戏模态框(游戏);
                 });
             });
         }
 
-        function filterAndRender(){ renderGames(); }
+        函数 过滤并渲染(){ 渲染游戏(); }
 
-        function openGameModal(game){
+        函数 打开游戏模态框(游戏){
             const screenshotsHtml = game.screenshots.map(u=>`<img class="screenshot-thumb" src="${u}">`).join('');
             const d=[];
             if(game.downloadLinks.quark) d.push(`<a href="${game.downloadLinks.quark}" target="_blank" class="download-btn"><i class="fab fa-quora"></i>夸克网盘</a>`);
-            if(game.downloadLinks.baidu) d.push(`<a href="${game.downloadLinks.baidu}" target="_blank" class="download-btn"><i class="fab fa-google-drive"></i>百度网盘</a>`);
-            if(game.downloadLinks.xunlei) d.push(`<a href="${game.downloadLinks.xunlei}" target="_blank" class="download-btn"><i class="fas fa-cloud-download-alt"></i>迅雷云盘</a>`);
+            如果(game.downloadLinks.百度) d.推送(${game.downloadLinks.百度}“目标=_blank 类=下载-按钮百度网盘`);
+如果(游戏.下载链接.迅雷) d.推送(`<a href="${game.downloadLinks.xunlei}" target="_blank" 类="download-btn"><i 类="fas fa-cloud-download-alt"></i>迅雷云盘</a>`);
             modalBody.innerHTML=`
-                <div class="modal-game-title">${game.title}</div><p style="color:#cbd5e1;margin-bottom:1.5rem;max-height:150px;overflow-y:auto;">${game.description}</p>
-                <div class="detail-section"><h3><i class="fas fa-image"></i> 游戏截图</h3><div class="screenshots-row">${screenshotsHtml||'<p>暂无截图</p>'}</div></div>
+                <div 类="modal-game-title">${game.title}</div><p style="color:#cbd5e1;margin-bottom:1.5rem;max-height:150px;overflow-y:auto;">${game.description}</p>
+                <div 类="detail-section"><h3><i 类="fas fa-image"></i> 游戏截图</h3><div 类="screenshots-row">${screenshotsHtml||'<p>暂无截图</p>'}</div></div>
                 <div class="detail-section"><h3><i class="fas fa-microchip"></i> 系统要求</h3><div class="sys-req">${game.systemReq.replace(/\n/g,'<br>')}</div></div>
                 <div class="detail-section"><h3><i class="fas fa-download"></i> 下载地址</h3><div class="download-group">${d.length?d.join(''):'<span class="no-link-msg">暂无可用链接</span>'}</div></div>
             `;
@@ -880,19 +349,19 @@
         searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch();});
 
         window.addEventListener('keydown',e=>{
-            if(e.key==='Escape'){
-                if(gameModal.classList.contains('active')) closeModal('gameModal');
+            如果(e.键==='Esc'){
+                如果(gameModal.classList.包含('active')) 关闭模态框(“gameModal”);
                 if(speedtestModal.classList.contains('active')) closeModal('speedtestModal');
                 if(aboutModal.classList.contains('active')) closeModal('aboutModal');
             }
         });
 
         // 网速测试
-        const startBtn = document.getElementById('startSpeedTest');
+        常量 开始按钮 = 文档.getElementById('开始速度测试');
         const speedDisplay = document.getElementById('speedDisplay');
         const speedDetail = document.getElementById('speedDetail');
         let testing = false;
-        async function performSpeedTest() {
+        异步 函数 执行速度测试() {
             if(testing) return;
             testing = true;
             startBtn.disabled = true;
@@ -902,7 +371,7 @@
             const testSizeMB = 5;
             const testData = new Uint8Array(testSizeMB * 1024 * 1024);
             const blob = new Blob([testData]);
-            try {
+            尝试 {
                 const startTime = performance.now();
                 const response = await fetch(URL.createObjectURL(blob));
                 const data = await response.arrayBuffer();
@@ -928,5 +397,5 @@
         renderGames();
     })();
 </script>
-</body>
+</正文>
 </html>

@@ -1,3 +1,5 @@
+/* ===== HyperWave 超波 · 游戏宇宙 样式表 ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +8,9 @@
 }
 
 body {
-    background-color: #0b0e14;
-    background-image: radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.03) 0%, transparent 30%),
-                      radial-gradient(circle at 80% 70%, rgba(200, 0, 255, 0.04) 0%, transparent 40%);
+    background-color: #05070a;
+    background-image: radial-gradient(circle at 30% 20%, rgba(100, 0, 255, 0.08) 0%, transparent 40%),
+                      radial-gradient(circle at 80% 80%, rgba(0, 180, 255, 0.05) 0%, transparent 50%);
     color: #eef4ff;
     min-height: 100vh;
     line-height: 1.5;
@@ -20,37 +22,42 @@ body {
     padding: 1.2rem 2rem;
 }
 
-/* 导航栏 */
+/* ----- 导航栏 ----- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0.8rem 0 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(120, 180, 255, 0.15);
 }
 
 .logo {
     display: flex;
     align-items: baseline;
-    gap: 6px;
+    gap: 8px;
 }
 
 .logo h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #fff 0%, #b0f0ff 80%);
+    background: linear-gradient(135deg, #c084fc, #60a5fa, #38bdf8);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 15px #3b82f680;
 }
 
 .logo span {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #aab9d4;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a78bfa, #93c5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     margin-left: 4px;
+    letter-spacing: 1px;
 }
 
 .nav-links {
@@ -60,58 +67,68 @@ body {
 }
 
 .nav-links a {
-    color: #ccd9f0;
+    color: #cbd5e1;
     text-decoration: none;
     font-size: 1.1rem;
     transition: all 0.2s;
     padding: 0.3rem 0;
     border-bottom: 2px solid transparent;
+    cursor: pointer;
 }
 
 .nav-links a:hover {
-    color: #7ad0ff;
-    border-bottom-color: #00c8ff;
-    text-shadow: 0 0 8px #00b4ff80;
+    color: #a5b4fc;
+    border-bottom-color: #818cf8;
+    text-shadow: 0 0 10px #6366f1;
 }
 
-/* Hero */
+/* ----- Hero (搜索下移) ----- */
 .hero {
-    margin: 2.5rem 0 2rem;
-    text-align: left;
+    margin: 4rem 0 2rem;
+    text-align: center;
 }
 
 .hero h2 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #f0f9ff, #b7e4ff, #d9b0ff);
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #c084fc, #60a5fa, #34d399);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px #8b5cf680;
 }
 
 .hero p {
-    color: #a3b8d9;
+    color: #9ca3af;
     font-size: 1.2rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 2.2rem;
     letter-spacing: 0.3px;
 }
 
 .search-wrapper {
     display: flex;
-    max-width: 650px;
-    background: rgba(10, 20, 30, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(15, 25, 40, 0.8);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid #2a3a55;
+    border: 1.5px solid #4f46e5;
     border-radius: 60px;
-    padding: 0.2rem 0.2rem 0.2rem 1.5rem;
+    padding: 0.2rem 0.2rem 0.2rem 1.8rem;
     align-items: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 0 1px #00a6ff1a;
+    box-shadow: 0 10px 30px -5px #00000080, 0 0 20px #3b82f640;
+    transition: box-shadow 0.2s;
+}
+
+.search-wrapper:focus-within {
+    border-color: #a78bfa;
+    box-shadow: 0 0 25px #8b5cf6;
 }
 
 .search-wrapper i {
-    color: #6c8db0;
+    color: #8b5cf6;
     font-size: 1.2rem;
 }
 
@@ -126,85 +143,130 @@ body {
 }
 
 .search-wrapper input::placeholder {
-    color: #7f99bb;
+    color: #6b7280;
     font-weight: 300;
 }
 
 .search-wrapper button {
-    background: linear-gradient(145deg, #0e2a44, #062136);
-    border: 1px solid #2d6a9f;
-    color: #d3ecff;
-    padding: 0.7rem 2rem;
+    background: linear-gradient(145deg, #4f46e5, #7c3aed);
+    border: none;
+    color: white;
+    padding: 0.75rem 2.2rem;
     border-radius: 40px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.2s;
-    box-shadow: 0 0 8px #0066ff33;
+    box-shadow: 0 0 15px #6366f1;
     letter-spacing: 0.5px;
+    border: 1px solid #a78bfa;
 }
 
 .search-wrapper button:hover {
-    background: #0f2f4f;
-    border-color: #3f9eff;
-    color: white;
-    box-shadow: 0 0 15px #0099ff;
+    background: linear-gradient(145deg, #6366f1, #8b5cf6);
+    box-shadow: 0 0 25px #8b5cf6;
+    transform: scale(1.02);
 }
 
+/* 可替换背景区域（位于分类上方） */
+.custom-bg-section {
+    margin: 3rem 0 1rem;
+    padding: 2.5rem 1rem;
+    border-radius: 40px;
+    /* 请将下方 url() 中的链接替换为您自己的图片地址 */
+    background-image: var(--custom-bg, url('https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'));
+    background-size: cover;
+    background-position: center;
+    background-color: #0f1a2b;
+    border: 1px solid #4f46e5;
+    box-shadow: 0 0 30px #3b2e6b80;
+    position: relative;
+}
+
+.custom-bg-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 7, 10, 0.6);
+    border-radius: 40px;
+    backdrop-filter: blur(3px);
+    z-index: 0;
+}
+
+.custom-bg-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 分类区域 (上下间距扩大) */
 .category-section {
-    margin: 2.2rem 0 1.8rem;
+    margin: 3.5rem 0 2.5rem;
 }
 
 .cat-title {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .cat-title i {
-    color: #00c2ff;
+    color: #a78bfa;
+    font-size: 1.6rem;
+}
+
+.cat-title span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #c084fc, #93c5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .category-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem 0.6rem;
+    justify-content: center;
+    gap: 1rem 1rem;
 }
 
 .cat-btn {
-    background: rgba(18, 30, 45, 0.8);
+    background: rgba(20, 30, 50, 0.7);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid #2d4b6e;
-    color: #cbd5e8;
-    padding: 0.6rem 1.5rem;
+    border: 1.5px solid #4c51bf;
+    color: #cbd5e1;
+    padding: 0.7rem 1.8rem;
     border-radius: 40px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px #0000004d;
 }
 
 .cat-btn i {
-    margin-right: 6px;
-    font-size: 0.9rem;
-    color: #6fa8dc;
+    margin-right: 8px;
+    color: #a5b4fc;
 }
 
 .cat-btn:hover {
-    background: #1f3a57;
-    border-color: #3d8bcd;
+    background: #3730a3;
+    border-color: #818cf8;
     color: white;
-    box-shadow: 0 0 12px #0088ff40;
+    box-shadow: 0 0 15px #6366f1;
 }
 
 .cat-btn.active {
-    background: linear-gradient(145deg, #0066cc, #003d99);
-    border-color: #6ec3ff;
+    background: linear-gradient(145deg, #6d28d9, #4f46e5);
+    border-color: #c084fc;
     color: white;
-    box-shadow: 0 0 18px #0080ff, inset 0 1px 0 #b0e0ff;
+    box-shadow: 0 0 20px #8b5cf6;
 }
 
 /* 游戏卡片网格 */
@@ -216,20 +278,21 @@ body {
 }
 
 .game-card {
-    background: rgba(8, 18, 28, 0.75);
+    background: rgba(12, 20, 32, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid #2b4058;
+    border: 1.5px solid #3b3f8c;
     border-radius: 24px;
     overflow: hidden;
-    transition: transform 0.25s, box-shadow 0.3s;
-    box-shadow: 0 15px 25px -8px rgba(0,0,0,0.7);
+    transition: all 0.25s ease;
+    box-shadow: 0 15px 25px -8px #000000b3;
+    cursor: pointer;
 }
 
 .game-card:hover {
     transform: translateY(-6px);
-    border-color: #3f8bcb;
-    box-shadow: 0 20px 30px -5px #000000cc, 0 0 20px #0055ff30;
+    border-color: #8b5cf6;
+    box-shadow: 0 20px 30px -5px #000000e6, 0 0 25px #7c3aed80;
 }
 
 .card-img {
@@ -237,7 +300,7 @@ body {
     height: 170px;
     object-fit: cover;
     background: #0e1a26;
-    border-bottom: 1px solid #2c4b66;
+    border-bottom: 1px solid #4c51bf;
 }
 
 .card-content {
@@ -247,27 +310,27 @@ body {
 .game-title {
     font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.game-title span {
-    background: linear-gradient(145deg, #e0f0ff, #b0d5ff);
+.game-title span:first-child {
+    background: linear-gradient(135deg, #e0e7ff, #b4c6fc);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
 .game-cat-badge {
-    background: #14273e;
-    padding: 0.2rem 0.8rem;
-    border-radius: 20px;
+    background: #1e1e4f;
+    padding: 0.25rem 0.9rem;
+    border-radius: 30px;
     font-size: 0.75rem;
-    font-weight: 600;
-    color: #9dc6ff;
-    border: 1px solid #356a9b;
+    font-weight: 700;
+    color: #b4c6fc;
+    border: 1px solid #6d28d9;
 }
 
 .card-actions {
@@ -279,36 +342,34 @@ body {
 
 .detail-btn {
     background: transparent;
-    border: 1.5px solid #2f6ea0;
-    color: #bfdeff;
-    padding: 0.5rem 1.3rem;
+    border: 1.8px solid #6d28d9;
+    color: #c7d2fe;
+    padding: 0.5rem 1.4rem;
     border-radius: 40px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
     backdrop-filter: blur(5px);
+    pointer-events: none;
 }
 
-.detail-btn i {
-    margin-left: 6px;
-    font-size: 0.8rem;
-}
-
-.detail-btn:hover {
-    background: #1f4970;
-    border-color: #6eb0ff;
-    color: white;
-    box-shadow: 0 0 12px #0077ff;
+.game-card:hover .detail-btn {
+    border-color: #a78bfa;
+    color: #ede9fe;
+    background: #4f46e520;
 }
 
 /* 模态框 */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,78 +386,96 @@ body {
 }
 
 .modal-content {
-    background: #0b1725;
-    border: 1px solid #2b5580;
-    border-radius: 32px;
+    background: #0b1322;
+    border: 2px solid #4f46e5;
+    border-radius: 36px;
     max-width: 900px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    padding: 2rem 2rem 2rem 2rem;
-    box-shadow: 0 30px 50px #000000b0, 0 0 0 1px #1d8cff33, 0 0 40px #003cff1a;
+    padding: 2rem 2.2rem;
+    box-shadow: 0 30px 50px #000000, 0 0 0 1px #6366f180, 0 0 60px #8b5cf640;
     position: relative;
     scrollbar-width: thin;
-    scrollbar-color: #3f7eb6 #102433;
+    scrollbar-color: #6d28d9 #1e1e3f;
 }
 
-.modal-content::-webkit-scrollbar { width: 6px; }
-.modal-content::-webkit-scrollbar-thumb { background: #2d6190; border-radius: 10px; }
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #7c3aed;
+    border-radius: 10px;
+}
 
 .modal-close {
     position: absolute;
-    top: 1.5rem; right: 1.8rem;
+    top: 1.5rem;
+    right: 1.8rem;
     background: none;
     border: none;
-    color: #afc9eb;
-    font-size: 2rem;
+    color: #a5b4fc;
+    font-size: 2.2rem;
     cursor: pointer;
     transition: 0.2s;
     line-height: 1;
 }
-.modal-close:hover { color: #6ec3ff; text-shadow: 0 0 15px #00a6ff; }
+
+.modal-close:hover {
+    color: #c084fc;
+    text-shadow: 0 0 20px #a78bfa;
+}
 
 .modal-game-title {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #fff, #b3dbff);
+    background: linear-gradient(135deg, #e0e7ff, #b4c6fc, #a78bfa);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     margin-bottom: 1rem;
+    padding-right: 2rem;
 }
 
-.detail-section { margin: 1.8rem 0; }
+.detail-section {
+    margin: 1.8rem 0;
+}
+
 .detail-section h3 {
-    color: #9dc6ff;
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-    border-left: 5px solid #2a9dff;
-    padding-left: 1rem;
+    color: #a78bfa;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-left: 6px solid #8b5cf6;
+    padding-left: 1.2rem;
 }
 
 .sys-req {
-    background: #0b1a29;
+    background: #0f1a2b;
     padding: 1.2rem 1.5rem;
     border-radius: 20px;
-    border: 1px solid #254a6e;
-    font-family: monospace;
+    border: 1px solid #4f46e5;
+    font-family: 'SF Mono', monospace;
     white-space: pre-wrap;
-    color: #c7deff;
+    color: #cbd5e1;
+    font-size: 0.95rem;
 }
 
 .screenshots-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 14px;
     margin-top: 10px;
 }
+
 .screenshot-thumb {
-    width: 150px;
-    height: 90px;
+    width: 160px;
+    height: 95px;
     object-fit: cover;
-    border-radius: 12px;
-    border: 1px solid #38658f;
-    background: #0a141f;
+    border-radius: 14px;
+    border: 2px solid #6d28d9;
+    background: #0e1a26;
+    transition: 0.2s;
 }
 
 .download-group {
@@ -405,35 +484,118 @@ body {
     gap: 1rem;
     margin-top: 0.5rem;
 }
+
 .download-btn {
-    background: #0e253a;
-    border: 1px solid #2f6396;
-    color: #e0f0ff;
-    padding: 0.7rem 1.6rem;
-    border-radius: 40px;
-    font-weight: 600;
+    background: #1e1e4f;
+    border: 1.5px solid #7c3aed;
+    color: #e0e7ff;
+    padding: 0.7rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     transition: 0.2s;
-    box-shadow: 0 4px 8px #00000040;
+    box-shadow: 0 4px 8px #00000060;
 }
-.download-btn i { color: #5db0ff; }
+
+.download-btn i {
+    color: #a78bfa;
+    font-size: 1.1rem;
+}
+
 .download-btn:hover {
-    background: #154a77;
-    border-color: #5ea9ff;
-    box-shadow: 0 0 18px #0077ff;
+    background: #2e1065;
+    border-color: #c084fc;
+    box-shadow: 0 0 20px #8b5cf6;
     color: white;
 }
 
 .footer-note {
     margin-top: 4rem;
     text-align: center;
-    color: #7f9bc0;
-    font-size: 0.9rem;
-    border-top: 1px solid #1e3349;
-    padding-top: 2rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+    border-top: 1px solid #1f2937;
+    padding-top: 2.5rem;
 }
 
-.no-link-msg { color: #7f9bb5; font-style: italic; }
+/* 网速测试 & 关于我们 */
+.speedtest-container,
+.about-container {
+    text-align: center;
+}
+
+.speedtest-box {
+    background: #0f1a2b;
+    border-radius: 30px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid #4f46e5;
+}
+
+.speed-meter {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #c084fc, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.speed-unit {
+    font-size: 1.2rem;
+    color: #9ca3af;
+}
+
+.test-btn {
+    background: linear-gradient(145deg, #4f46e5, #7c3aed);
+    border: none;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px #6366f1;
+    margin: 1.5rem 0;
+    border: 1px solid #a78bfa;
+    transition: 0.2s;
+}
+
+.test-btn:hover {
+    background: #6366f1;
+    box-shadow: 0 0 30px #8b5cf6;
+}
+
+.test-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.about-info {
+    background: #0f1a2b;
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid #4f46e5;
+    text-align: left;
+}
+
+.contact-item {
+    显示: flex;
+    align-items: center;
+    间距: 15像素;
+    padding: 12px 0;
+    border-bottom: 1px solid #2d3a5e;
+}
+
+.contact-item i {
+    宽度: 30像素;
+    颜色: #a78bfa;
+}
+
+.no-link-msg {
+    颜色: #9ca3af;
+    字体样式: 斜体;
+}

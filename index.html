@@ -5,52 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HyperWave 超波 | 游戏资源空间站</title>
   <style>
-    /* 全局基础样式 */
-    :root {
-      --bg-primary: #0c0c14;
-      --bg-card: #12121a;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --accent-blue: #00d1ff;
-      --accent-purple: #9d00ff;
-      --accent-gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    }
-    
+    /* 全局样式重置 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Microsoft YaHei', sans-serif;
+      font-family: "Microsoft Yahei", sans-serif;
     }
-    
+
+    /* 全局变量 */
+    :root {
+      --bg-main: #0a0a14;
+      --bg-card: #121224;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --accent-gradient: linear-gradient(90deg, #00d1ff, #a300ff);
+      --border-radius: 12px;
+    }
+
+    /* 页面主体 */
     body {
-      background-color: var(--bg-primary);
+      background-color: var(--bg-main);
       color: var(--text-primary);
       min-height: 100vh;
     }
-    
+
     .container {
-      width: 90%;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 20px;
     }
-    
-    /* 头部样式 */
+
+    /* 顶部导航栏 */
     .hw-header {
       padding: 20px 0;
-      border-bottom: 1px solid rgba(0, 209, 255, 0.1);
-      position: sticky;
-      top: 0;
-      background-color: var(--bg-primary);
-      z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    
+
+    .hw-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .logo {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 10px;
     }
-    
+
     .logo-text {
       font-size: 24px;
       font-weight: 900;
@@ -59,24 +62,18 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .logo-sub {
       font-size: 16px;
       color: var(--text-secondary);
     }
-    
-    .hw-header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
+
     .nav-menu {
       display: flex;
       gap: 30px;
       align-items: center;
     }
-    
+
     .nav-link {
       color: var(--text-primary);
       text-decoration: none;
@@ -84,57 +81,68 @@
       transition: all 0.3s ease;
       position: relative;
     }
-    
+
     .nav-link.active {
-      color: var(--accent-blue);
+      color: #00d1ff;
     }
-    
+
     .nav-link:hover {
-      color: var(--accent-blue);
+      color: #00d1ff;
     }
-    
-    /* 下拉菜单样式 */
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    /* 下拉菜单 */
     .dropdown {
       position: relative;
     }
-    
+
     .dropdown-menu {
       position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: var(--bg-card);
-      border: 1px solid rgba(0, 209, 255, 0.2);
-      border-radius: 10px;
+      top: 120%;
+      left: 0;
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
       padding: 10px 0;
       min-width: 150px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
       display: none;
-      z-index: 9999;
+      z-index: 999;
+      border: 1px solid rgba(0,209,255,0.2);
     }
-    
+
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    
+
     .dropdown-menu a {
       display: block;
-      padding: 10px 20px;
+      padding: 8px 20px;
       color: var(--text-primary);
       text-decoration: none;
       transition: all 0.3s ease;
     }
-    
+
     .dropdown-menu a:hover {
-      background-color: rgba(0, 209, 255, 0.1);
-      color: var(--accent-blue);
+      background: rgba(0,209,255,0.1);
+      color: #00d1ff;
     }
-    
-    /* 英雄区样式 */
+
+    /* 英雄区 */
     .hw-hero {
       padding: 60px 0;
       text-align: center;
     }
-    
+
     .hero-title {
       font-size: 48px;
       font-weight: 900;
@@ -144,165 +152,167 @@
       background-clip: text;
       margin-bottom: 20px;
     }
-    
+
     .hero-desc {
       font-size: 18px;
       color: var(--text-secondary);
       margin-bottom: 40px;
     }
-    
+
     .hero-search {
+      display: flex;
       max-width: 600px;
       margin: 0 auto;
-      display: flex;
       gap: 10px;
     }
-    
+
     #search {
       flex: 1;
       padding: 15px 20px;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,209,255,0.2);
       border-radius: 30px;
-      border: 1px solid rgba(0, 209, 255, 0.2);
-      background-color: var(--bg-card);
       color: var(--text-primary);
       font-size: 16px;
       outline: none;
+      transition: all 0.3s ease;
     }
-    
+
     #search:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 15px rgba(0, 209, 255, 0.2);
+      border-color: #00d1ff;
+      box-shadow: 0 0 10px rgba(0,209,255,0.2);
     }
-    
+
     .search-btn {
       padding: 15px 30px;
-      border-radius: 30px;
-      border: none;
       background: var(--accent-gradient);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0,209,255,0.5);
+    }
+
+    /* 分类导航 */
+    .hw-category {
+      padding: 20px 0;
+      margin-bottom: 40px;
+    }
+
+    .hw-category .container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .category-btn {
+      padding: 10px 25px;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,209,255,0.2);
+      border-radius: 30px;
       color: var(--text-primary);
       font-size: 16px;
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    
-    .search-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
-    }
-    
-    /* 分类栏样式 */
-    .hw-category {
-      padding: 20px 0;
-      border-top: 1px solid rgba(0, 209, 255, 0.1);
-      border-bottom: 1px solid rgba(0, 209, 255, 0.1);
-      margin-bottom: 40px;
-    }
-    
-    .category-btn {
-      padding: 8px 20px;
-      margin: 0 5px;
-      border-radius: 20px;
-      border: 1px solid rgba(0, 209, 255, 0.2);
-      background-color: transparent;
-      color: var(--text-primary);
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
+
     .category-btn.active {
       background: var(--accent-gradient);
+      color: white;
       border-color: transparent;
-      color: var(--text-primary);
     }
-    
+
     .category-btn:hover:not(.active) {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
+      border-color: #00d1ff;
+      color: #00d1ff;
     }
-    
-    /* 游戏列表样式 */
+
+    /* 游戏列表网格 */
     .hw-game-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 30px;
-      margin-bottom: 60px;
+      padding: 20px 0 60px;
     }
-    
+
+    /* 游戏卡片 */
     .game-card {
-      background-color: var(--bg-card);
-      border-radius: 15px;
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
       overflow: hidden;
-      border: 1px solid rgba(0, 209, 255, 0.1);
       transition: all 0.3s ease;
+      border: 1px solid rgba(0,209,255,0.1);
     }
-    
+
     .game-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(0, 209, 255, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0,209,255,0.15);
+      border-color: rgba(0,209,255,0.3);
     }
-    
+
     .game-cover {
       width: 100%;
       height: 180px;
       object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    
+
     .game-info {
       padding: 20px;
     }
-    
+
     .game-title {
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 10px;
       color: var(--text-primary);
     }
-    
+
     .game-type {
       display: inline-block;
       padding: 3px 10px;
-      border-radius: 10px;
-      background-color: rgba(0, 209, 255, 0.1);
-      color: var(--accent-blue);
+      background: rgba(0,209,255,0.1);
+      color: #00d1ff;
+      border-radius: 12px;
       font-size: 12px;
       margin-bottom: 15px;
     }
-    
+
     .download-btn {
       width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
+      padding: 10px 0;
       background: var(--accent-gradient);
-      color: var(--text-primary);
-      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    
+
     .download-btn:hover {
-      box-shadow: 0 0 15px rgba(0, 209, 255, 0.2);
+      box-shadow: 0 0 15px rgba(0,209,255,0.3);
     }
-    
-    /* 弹窗动画 */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    /* 底部样式 */
+
+    /* 页脚 */
     .hw-footer {
       padding: 40px 0;
-      border-top: 1px solid rgba(0, 209, 255, 0.1);
-      margin-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
     }
-    
+
     .footer-content {
       text-align: center;
     }
-    
+
     .footer-logo {
       font-size: 20px;
       font-weight: 900;
@@ -312,61 +322,40 @@
       background-clip: text;
       margin-bottom: 15px;
     }
-    
+
     .footer-desc {
       color: var(--text-secondary);
       font-size: 14px;
       margin-bottom: 20px;
     }
-    
+
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 20px;
     }
-    
+
     .footer-links a {
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       transition: all 0.3s ease;
     }
-    
+
     .footer-links a:hover {
-      color: var(--accent-blue);
+      color: #00d1ff;
     }
-    
-    /* 响应式适配 */
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 36px;
-      }
-      .hero-desc {
-        font-size: 16px;
-      }
-      .nav-menu {
-        gap: 15px;
-      }
-      .logo-text {
-        font-size: 20px;
-      }
-      .logo-sub {
-        font-size: 16px;
-      }
-      .hw-game-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-      }
-      .dropdown-menu {
-        right: auto;
-        left: 0;
-      }
+
+    /* 弹窗动画 */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-<!-- 顶部导航栏（带渐变LOGO） -->
+<!-- 顶部导航栏 -->
 <header class="hw-header">
   <div class="container">
     <div class="logo">
@@ -394,7 +383,7 @@
   </div>
 </header>
 
-<!-- 英雄区（中间大LOGO） -->
+<!-- 英雄区 -->
 <section class="hw-hero">
   <div class="container">
     <div class="hero-content">
@@ -408,7 +397,7 @@
   </div>
 </section>
 
-<!-- 分类导航（和游戏分类完全同步） -->
+<!-- 分类导航 -->
 <section class="hw-category">
   <div class="container">
     <button class="category-btn active" data-type="all">全部资源</button>
@@ -422,12 +411,12 @@
   </div>
 </section>
 
-<!-- 游戏资源列表（核心显示区域） -->
+<!-- 游戏资源列表 -->
 <main class="container">
   <div class="hw-game-grid" id="gameList"></div>
 </main>
 
-<!-- 底部 -->
+<!-- 页脚 -->
 <footer class="hw-footer">
   <div class="container">
     <div class="footer-content">
@@ -442,6 +431,326 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<!-- 内嵌所有JS代码（无外部依赖） -->
+<script>
+// 游戏数据
+var games = [
+  {
+    title: "与你在一起",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/yuniyiqizai/400/250",
+    desc: "主角James接手民宿，寻找失踪哥哥，并与美丽房客发展感情的3D开放世界恋爱养成游戏。",
+    download: "https://pan.quark.cn/s/83852767b0b5"
+  },
+  {
+    title: "游戏常用运行库合集",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/runtime/400/250",
+    desc: "游戏必备运行库一键安装包，解决缺少dll、无法启动等90%问题。",
+    download: "https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G"
+  },
+  {
+    title: "浣熊推币机",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/raccooncoin/400/250",
+    desc: "推币机 + 肉鸽卡组构建，150种道具，6名角色，超爽解压。",
+    download: "https://pan.quark.cn/s/0624ed9c4b96"
+  },
+  {
+    title: "灰烬之国",
+    type: "动作",
+    cover: "https://picsum.photos/seed/cinderia/400/250",
+    desc: "黑暗童话风Roguelite动作游戏，4角色+180技能，爽感战斗。",
+    download: "https://pan.quark.cn/s/dc61e6bca6a5"
+  },
+  {
+    title: "被勒索的主播",
+    type: "恐怖",
+    cover: "https://picsum.photos/seed/hackedstreamer/400/250",
+    desc: "真人演出互动电影，50+决策点，5种结局，悬疑窒息。",
+    download: "https://pan.quark.cn/s/b6490b0fad4e"
+  },
+  {
+    title: "太空中的妈妈被盗",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/spacemom/400/250",
+    desc: "太空探索解谜，寻找妈妈与朋友，剧情向冒险。",
+    download: "https://pan.quark.cn/s/a63341762d27"
+  },
+  {
+    title: "钢铁雄心4",
+    type: "动作",
+    cover: "https://picsum.photos/seed/hoi4/400/250",
+    desc: "二战史诗级战略游戏，含全DLC，历史由你改写。",
+    download: "https://pan.quark.cn/s/f995c036371a"
+  },
+  {
+    title: "边境检察官",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/border/400/250",
+    desc: "边防检察官模拟，查证件、缉私、枪战、追缉，高压体验。",
+    download: "https://pan.quark.cn/s/d9acffb363e8"
+  },
+  {
+    title: "宗门起源",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/zongmen/400/250",
+    desc: "开放世界修仙，建宗门、收弟子、闯江湖、抢地盘。",
+    download: "https://pan.quark.cn/s/5d5e9b79727e"
+  },
+  {
+    title: "纯白和弦（内置作弊）",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/whitechord/400/250",
+    desc: "歌剧少女养成卡牌手游，内置作弊菜单，爽玩全内容。",
+    download: "https://pan.quark.cn/s/25adef09202d"
+  },
+  {
+    title: "饿殍：明末千里行（解锁版）",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/epiao/400/250",
+    desc: "明末黑暗剧情向AVG，双向救赎故事，全内容解锁。",
+    download: "https://pan.quark.cn/s/9be2f2f79a24"
+  },
+  {
+    title: "大富翁 1-11 合集",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/richman/400/250",
+    desc: "经典大富翁全系列合集，童年回忆一次性集齐。",
+    download: "https://pan.quark.cn/s/0c0391e7919c"
+  },
+  {
+    title: "千恋*万花",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/senren/400/250",
+    desc: "柚子社神作，和风恋爱冒险，全语音全CG。",
+    download: "https://pan.quark.cn/s/d06c56e05433"
+  },
+  {
+    title: "中国式网游",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/chinesemmo/400/250",
+    desc: "模拟国产网游氪金人生，超多结局，爆笑玩梗。",
+    download: "https://pan.quark.cn/s/96047cc5daa0"
+  },
+  {
+    title: "夏日美女：欧巴请和我恋爱吧",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/summerlove/400/250",
+    desc: "乡村恋爱冒险，5位女主，多结局，沉浸式第一人称。",
+    download: "https://pan.quark.cn/s/d597200fb40d?pwd=8XmX"
+  },
+  {
+    title: "杀戮尖塔2",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/sts2/400/250",
+    desc: "神作卡牌续作，单机+联机，送修改器，免安装中文版。",
+    download: "https://pan.quark.cn/s/de756bf7a5d2"
+  },
+  {
+    title: "灾后修复师",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/roadcraft/400/250",
+    desc: "灾后重建模拟，40+工程车辆，8张地图，支持多人联机。",
+    download: "https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV"
+  },
+  {
+    title: "攀爬动物：在一起",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/climberanimal/400/250",
+    desc: "多人跑酷闯关，1-8人联机，跌倒重来，欢乐刺激。",
+    download: "https://pan.quark.cn/s/849049828092?pwd=Azet"
+  },
+  {
+    title: "美女，请别影响我成仙",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/xiuxian/400/250",
+    desc: "第一人称修仙，多位美女角色，多分支剧情。",
+    download: "https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG"
+  },
+  {
+    title: "死亡搁浅2：冥滩之上",
+    type: "动作",
+    cover: "https://picsum.photos/seed/deathstranding2/400/250",
+    desc: "小岛秀夫神作续作，PC终极版，开放世界连接玩法。",
+    download: "https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ"
+  },
+  {
+    title: "刮个爽",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/scratchy/400/250",
+    desc: "刮刮乐减压游戏，自动挂机，财富狂飙，超上头。",
+    download: "https://pan.quark.cn/s/09160ad8e6b7"
+  }
+];
+
+// DOM元素获取
+var gameList = document.getElementById("gameList");
+var searchInput = document.getElementById("search");
+var categoryBtns = document.querySelectorAll(".category-btn");
+var dropdownLinks = document.querySelectorAll(".dropdown-menu a");
+
+// 渲染游戏列表
+function renderGameList(filteredGames) {
+  gameList.innerHTML = "";
+  if (!filteredGames || filteredGames.length === 0) {
+    gameList.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-secondary); font-size: 18px; padding: 50px 0;'>暂无相关资源</p>";
+    return;
+  }
+  for (var i = 0; i < filteredGames.length; i++) {
+    var game = filteredGames[i];
+    var card = document.createElement("div");
+    card.className = "game-card";
+    card.innerHTML = 
+      '<img src="' + game.cover + '" alt="' + game.title + '" class="game-cover" loading="lazy">' +
+      '<div class="game-info">' +
+        '<h3 class="game-title">' + game.title + '</h3>' +
+        '<span class="game-type">' + game.type + '</span>' +
+        '<button class="download-btn" onclick="openDetail(\'' + game.title.replace(/'/g, "\\'") + '\')">查看详情</button>' +
+      '</div>';
+    gameList.appendChild(card);
+  }
+}
+
+// 打开详情弹窗
+function openDetail(gameTitle) {
+  var game = null;
+  for (var i = 0; i < games.length; i++) {
+    if (games[i].title === gameTitle) {
+      game = games[i];
+      break;
+    }
+  }
+  if (!game) return;
+
+  // 移除旧弹窗
+  var existingModal = document.querySelector(".game-detail-modal");
+  if (existingModal) existingModal.remove();
+
+  // 创建弹窗
+  var modal = document.createElement("div");
+  modal.className = "game-detail-modal";
+  modal.style.cssText = "position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.9);z-index: 99999;display: flex;align-items: center;justify-content: center;padding: 20px;animation: fadeIn 0.3s ease;";
+
+  var box = document.createElement("div");
+  box.style.cssText = "background: var(--bg-card);max-width: 700px;width: 100%;border-radius: 20px;padding: 35px;position: relative;border: 1px solid rgba(0, 209, 255, 0.5);box-shadow: 0 0 40px rgba(0, 209, 255, 0.3);";
+
+  box.innerHTML = 
+    '<h2 style="font-size: 28px; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">' + game.title + '</h2>' +
+    '<p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">【' + game.type + '】</p>' +
+    '<p style="color: var(--text-primary); line-height: 1.8; margin-bottom: 30px; font-size: 16px;">' + game.desc + '</p>' +
+    '<a href="' + game.download + '" target="_blank" style="display: inline-block; padding: 14px 30px; background: var(--accent-gradient); color: var(--text-primary); border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s ease;">立即下载</a>' +
+    '<button onclick="this.closest(\'.game-detail-modal\').remove()" style="position: absolute; right: 25px; top: 25px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(0,209,255,0.3); padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">关闭</button>';
+
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+
+  // 点击遮罩关闭
+  modal.onclick = function(e) {
+    if (e.target === modal) modal.remove();
+  };
+
+  // 按钮hover效果
+  var closeBtn = box.querySelector("button");
+  closeBtn.onmouseenter = function() {
+    closeBtn.style.background = "rgba(0,209,255,0.2)";
+  };
+  closeBtn.onmouseleave = function() {
+    closeBtn.style.background = "rgba(255,255,255,0.1)";
+  };
+
+  var downloadBtn = box.querySelector("a");
+  downloadBtn.onmouseenter = function() {
+    downloadBtn.style.transform = "translateY(-2px)";
+    downloadBtn.style.boxShadow = "0 0 20px rgba(0,209,255,0.5)";
+  };
+  downloadBtn.onmouseleave = function() {
+    downloadBtn.style.transform = "translateY(0)";
+    downloadBtn.style.boxShadow = "none";
+  };
+}
+
+// 搜索功能
+searchInput.oninput = function() {
+  var keyword = searchInput.value.toLowerCase().trim();
+  var filteredGames = [];
+  for (var i = 0; i < games.length; i++) {
+    var game = games[i];
+    if (game.title.toLowerCase().indexOf(keyword) !== -1 || game.type.toLowerCase().indexOf(keyword) !== -1) {
+      filteredGames.push(game);
+    }
+  }
+  renderGameList(filteredGames);
+  
+  // 重置分类按钮
+  for (var j = 0; j < categoryBtns.length; j++) {
+    categoryBtns[j].classList.remove("active");
+  }
+  document.querySelector('.category-btn[data-type="all"]').classList.add("active");
+};
+
+// 分类按钮筛选
+for (var k = 0; k < categoryBtns.length; k++) {
+  categoryBtns[k].onclick = function() {
+    // 重置激活状态
+    for (var m = 0; m < categoryBtns.length; m++) {
+      categoryBtns[m].classList.remove("active");
+    }
+    this.classList.add("active");
+    
+    var type = this.dataset.type;
+    var filteredGames = [];
+    if (type === "all") {
+      filteredGames = games;
+    } else {
+      for (var n = 0; n < games.length; n++) {
+        if (games[n].type === type) {
+          filteredGames.push(games[n]);
+        }
+      }
+    }
+    renderGameList(filteredGames);
+  };
+}
+
+// 下拉菜单筛选
+for (var p = 0; p < dropdownLinks.length; p++) {
+  dropdownLinks[p].onclick = function(e) {
+    e.preventDefault();
+    var type = this.dataset.type;
+    
+    // 同步分类按钮
+    for (var q = 0; q < categoryBtns.length; q++) {
+      if (categoryBtns[q].dataset.type === type) {
+        categoryBtns[q].classList.add("active");
+      } else {
+        categoryBtns[q].classList.remove("active");
+      }
+    }
+    
+    // 筛选游戏
+    var filteredGames = [];
+    if (type === "all") {
+      filteredGames = games;
+    } else {
+      for (var r = 0; r < games.length; r++) {
+        if (games[r].type === type) {
+          filteredGames.push(games[r]);
+        }
+      }
+    }
+    renderGameList(filteredGames);
+  };
+}
+
+// 页面加载完成后渲染
+window.onload = function() {
+  renderGameList(games);
+};
+
+// 兜底渲染
+renderGameList(games);
+</script>
+
 </body>
 </html>

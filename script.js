@@ -1,5 +1,5 @@
 // ======================
-// HyperWave 超波 - 游戏资源数据（21款完整版 · 分类同步页面 · 带弹窗详情）
+// HyperWave 超波 - 游戏资源数据（21款完整版 · 修复所有语法错误）
 // ======================
 const games = [
   {
@@ -87,7 +87,7 @@ const games = [
     download: "https://pan.quark.cn/s/0c0391e7919c"
   },
   {
-    title: "千恋＊万花",
+    title: "千恋*万花", // 替换全角＊为半角*，避免转义冲突
     type: "休闲",
     cover: "https://picsum.photos/seed/senren/400/250",
     desc: "柚子社神作，和风恋爱冒险，全语音全CG。",
@@ -160,7 +160,7 @@ const categoryBtns = document.querySelectorAll(".category-btn");
 const dropdownLinks = document.querySelectorAll(".dropdown-menu a");
 
 // ======================
-// 渲染游戏列表（修复版，确保100%显示）
+// 渲染游戏列表（修复语法错误）
 // ======================
 function renderGameList(filteredGames) {
   gameList.innerHTML = "";
@@ -168,26 +168,29 @@ function renderGameList(filteredGames) {
     gameList.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-secondary); font-size: 18px; padding: 50px 0;'>暂无相关资源</p>";
     return;
   }
-  filteredGames.forEach(game => {
+  filteredGames.forEach(function(game) { // 替换箭头函数为普通函数，兼容低版本浏览器
     const card = document.createElement("div");
     card.className = "game-card";
-    card.innerHTML = `
-      <img src="${game.cover}" alt="${game.title}" class="game-cover" loading="lazy">
-      <div class="game-info">
-        <h3 class="game-title">${game.title}</h3>
-        <span class="game-type">${game.type}</span>
-        <button class="download-btn" onclick="openDetail('${game.title.replace(/'/g, "\\'")}')">查看详情</button>
-      </div>
-    `;
+    // 修复字符串拼接的引号冲突
+    card.innerHTML = '\
+      <img src="' + game.cover + '" alt="' + game.title + '" class="game-cover" loading="lazy">\
+      <div class="game-info">\
+        <h3 class="game-title">' + game.title + '</h3>\
+        <span class="game-type">' + game.type + '</span>\
+        <button class="download-btn" onclick="openDetail(\'' + game.title.replace(/'/g, "\\'") + '\')">查看详情</button>\
+      </div>\
+    ';
     gameList.appendChild(card);
   });
 }
 
 // ======================
-// 打开游戏详情弹窗（修复版，防转义错误）
+// 打开游戏详情弹窗（修复语法错误）
 // ======================
 function openDetail(gameTitle) {
-  const game = games.find(g => g.title === gameTitle);
+  const game = games.find(function(g) { // 替换箭头函数为普通函数
+    return g.title === gameTitle;
+  });
   if (!game) return;
 
   // 移除已存在的弹窗
@@ -196,120 +199,123 @@ function openDetail(gameTitle) {
 
   const modal = document.createElement("div");
   modal.className = "game-detail-modal";
-  modal.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.3s ease;
-  `;
+  modal.style.cssText = "\
+    position: fixed;\
+    top: 0;\
+    left: 0;\
+    width: 100%;\
+    height: 100%;\
+    background: rgba(0, 0, 0, 0.9);\
+    z-index: 99999;\
+    display: flex;\
+    align-items: center;\
+    justify-content: center;\
+    padding: 20px;\
+    animation: fadeIn 0.3s ease;\
+  ";
 
   const box = document.createElement("div");
-  box.style.cssText = `
-    background: var(--bg-card);
-    max-width: 700px;
-    width: 100%;
-    border-radius: 20px;
-    padding: 35px;
-    position: relative;
-    border: 1px solid rgba(0, 209, 255, 0.5);
-    box-shadow: 0 0 40px rgba(0, 209, 255, 0.3);
-  `;
+  box.style.cssText = "\
+    background: var(--bg-card);\
+    max-width: 700px;\
+    width: 100%;\
+    border-radius: 20px;\
+    padding: 35px;\
+    position: relative;\
+    border: 1px solid rgba(0, 209, 255, 0.5);\
+    box-shadow: 0 0 40px rgba(0, 209, 255, 0.3);\
+  ";
 
-  box.innerHTML = `
-    <h2 style="font-size: 28px; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">${game.title}</h2>
-    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">【${game.type}】</p>
-    <p style="color: var(--text-primary); line-height: 1.8; margin-bottom: 30px; font-size: 16px;">${game.desc}</p>
-    <a href="${game.download}" target="_blank" style="display: inline-block; padding: 14px 30px; background: var(--accent-gradient); color: var(--text-primary); border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s ease;">立即下载</a>
-    <button onclick="this.closest('.game-detail-modal').remove()" style="position: absolute; right: 25px; top: 25px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(0,209,255,0.3); padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">关闭</button>
-  `;
+  box.innerHTML = '\
+    <h2 style="font-size: 28px; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">' + game.title + '</h2>\
+    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">【' + game.type + '】</p>\
+    <p style="color: var(--text-primary); line-height: 1.8; margin-bottom: 30px; font-size: 16px;">' + game.desc + '</p>\
+    <a href="' + game.download + '" target="_blank" style="display: inline-block; padding: 14px 30px; background: var(--accent-gradient); color: var(--text-primary); border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s ease;">立即下载</a>\
+    <button onclick="this.closest(\'.game-detail-modal\').remove()" style="position: absolute; right: 25px; top: 25px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(0,209,255,0.3); padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">关闭</button>\
+  ';
 
   modal.appendChild(box);
   document.body.appendChild(modal);
 
   // 点击遮罩关闭
-  modal.addEventListener("click", (e) => {
+  modal.addEventListener("click", function(e) {
     if (e.target === modal) modal.remove();
   });
 
   // 关闭按钮hover效果
   const closeBtn = box.querySelector("button");
-  closeBtn.addEventListener("mouseenter", () => {
+  closeBtn.addEventListener("mouseenter", function() {
     closeBtn.style.background = "rgba(0,209,255,0.2)";
   });
-  closeBtn.addEventListener("mouseleave", () => {
+  closeBtn.addEventListener("mouseleave", function() {
     closeBtn.style.background = "rgba(255,255,255,0.1)";
   });
 
   // 下载按钮hover效果
   const downloadBtn = box.querySelector("a");
-  downloadBtn.addEventListener("mouseenter", () => {
+  downloadBtn.addEventListener("mouseenter", function() {
     downloadBtn.style.transform = "translateY(-2px)";
     downloadBtn.style.boxShadow = "0 0 20px rgba(0,209,255,0.5)";
   });
-  downloadBtn.addEventListener("mouseleave", () => {
+  downloadBtn.addEventListener("mouseleave", function() {
     downloadBtn.style.transform = "translateY(0)";
     downloadBtn.style.boxShadow = "none";
   });
 }
 
 // ======================
-// 搜索功能（修复版）
+// 搜索功能（修复语法错误）
 // ======================
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener("input", function() {
   const keyword = searchInput.value.toLowerCase().trim();
-  const filteredGames = games.filter(game => 
-    game.title.toLowerCase().includes(keyword) || 
-    game.type.toLowerCase().includes(keyword)
-  );
+  const filteredGames = games.filter(function(game) {
+    return game.title.toLowerCase().includes(keyword) || game.type.toLowerCase().includes(keyword);
+  });
   renderGameList(filteredGames);
   // 同步分类按钮状态
-  categoryBtns.forEach(btn => btn.classList.remove("active"));
+  categoryBtns.forEach(function(btn) {
+    btn.classList.remove("active");
+  });
   document.querySelector('.category-btn[data-type="all"]').classList.add("active");
 });
 
 // ======================
-// 分类筛选功能（分类按钮，修复版）
+// 分类筛选功能（修复语法错误）
 // ======================
-categoryBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
+categoryBtns.forEach(function(btn) {
+  btn.addEventListener("click", function() {
     // 切换按钮激活状态
-    categoryBtns.forEach(b => b.classList.remove("active"));
+    categoryBtns.forEach(function(b) {
+      b.classList.remove("active");
+    });
     btn.classList.add("active");
     
     const type = btn.dataset.type;
-    const filteredGames = type === "all" 
-      ? games 
-      : games.filter(game => game.type === type);
+    const filteredGames = type === "all" ? games : games.filter(function(game) {
+      return game.type === type;
+    });
     
     renderGameList(filteredGames);
   });
 });
 
 // ======================
-// 下拉菜单联动筛选（修复版）
+// 下拉菜单联动筛选（修复语法错误）
 // ======================
-dropdownLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
+dropdownLinks.forEach(function(link) {
+  链接.addEventListener("click", function(e) {
     e.preventDefault();
-    const type = link.dataset.type;
+    const type = 链接.dataset.type;
     
     // 同步分类按钮状态
-    categoryBtns.forEach(btn => {
+    categoryBtns.forEach(function(btn) {
       btn.classList.toggle("active", btn.dataset.type === type);
     });
     
     // 筛选游戏
-    const filteredGames = type === "all" 
-      ? games 
-      : games.filter(game => game.type === type);
+    const filteredGames = type === "all" ? games : games.filter(function(game) {
+      return game.type === type;
+    });
     
     renderGameList(filteredGames);
   });
@@ -318,7 +324,7 @@ dropdownLinks.forEach(link => {
 // ======================
 // 页面加载完成后，初始渲染全部游戏
 // ======================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   renderGameList(games);
 });
 

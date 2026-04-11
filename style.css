@@ -6,7 +6,7 @@
   font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
 }
 
-/* 主题色变量（完全匹配LOGO蓝紫渐变） */
+/* 主题色变量（蓝紫渐变，匹配LOGO） */
 :root {
   --bg-primary: #000000;
   --bg-secondary: #0a0a0f;
@@ -33,12 +33,12 @@ body {
   padding: 0 20px;
 }
 
-/* 顶部导航 */
+/* 顶部导航栏 */
 .hw-header {
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 209, 255, 0.2);
-  padding: 12px 0;
+  padding: 18px 0;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -50,13 +50,35 @@ body {
   align-items: center;
 }
 
-/* 图片LOGO样式 */
-.logo-img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
+/* ✅ 左上角渐变LOGO（和中间大LOGO样式统一） */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.logo-text {
+  font-size: 24px;
+  font-weight: 900;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
+}
+
+.logo-sub {
+  font-size: 18px;
+  font-weight: 700;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
+}
+
+/* 导航菜单 */
 .nav-menu {
   display: flex;
   gap: 30px;
@@ -91,7 +113,7 @@ body {
   width: 100%;
 }
 
-/* 下拉菜单样式 */
+/* 下拉菜单 */
 .dropdown {
   position: relative;
 }
@@ -133,7 +155,7 @@ body {
   padding-left: 25px;
 }
 
-/* 英雄区（主视觉） */
+/* 英雄区（中间大LOGO） */
 .hw-hero {
   background: radial-gradient(circle at center, rgba(0, 209, 255, 0.15) 0%, transparent 70%), var(--bg-primary);
   padding: 80px 0;
@@ -366,22 +388,25 @@ body {
 }
 
 .footer-links a:hover {
-  color: var(--accent-blue);
+  颜色: var(--accent-blue);
 }
 
 /* 响应式适配 */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 36px;
+    字体大小: 36像素;
   }
   .hero-desc {
-    font-size: 16px;
+    字体大小: 16像素;
   }
   .nav-menu {
-    gap: 15px;
+    间距: 15像素;
   }
-  .logo-img {
-    height: 40px;
+  .logo-text {
+    字体大小: 20像素;
+  }
+  .logo-sub {
+    字体大小: 16像素;
   }
   .hw-game-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

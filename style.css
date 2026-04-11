@@ -50,7 +50,7 @@ body {
   align-items: center;
 }
 
-/* ✅ 左上角渐变LOGO（和中间大LOGO样式统一） */
+/* 左上角渐变LOGO（和中间大LOGO样式统一） */
 .logo {
   display: flex;
   align-items: center;
@@ -58,7 +58,7 @@ body {
 }
 
 .logo-text {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 900;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
@@ -69,8 +69,8 @@ body {
 }
 
 .logo-sub {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 900;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -88,7 +88,7 @@ body {
 .nav-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
@@ -164,7 +164,7 @@ body {
 }
 
 .hero-title {
-  font-size: 56px;
+  font-size: 60px;
   font-weight: 900;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
@@ -176,26 +176,26 @@ body {
 }
 
 .hero-desc {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text-secondary);
   margin-bottom: 40px;
 }
 
 .hero-search {
   display: flex;
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   gap: 10px;
 }
 
 .hero-search input {
   flex: 1;
-  padding: 15px 20px;
-  border-radius: 30px;
+  padding: 18px 25px;
+  border-radius: 35px;
   border: 1px solid rgba(0, 209, 255, 0.3);
   background: rgba(18, 18, 26, 0.8);
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 18px;
   outline: none;
   transition: all 0.3s ease;
 }
@@ -206,12 +206,12 @@ body {
 }
 
 .search-btn {
-  padding: 15px 30px;
-  border-radius: 30px;
+  padding: 18px 35px;
+  border-radius: 35px;
   border: none;
   background: var(--accent-gradient);
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -237,12 +237,12 @@ body {
 }
 
 .category-btn {
-  padding: 10px 25px;
-  border-radius: 25px;
+  padding: 12px 28px;
+  border-radius: 28px;
   border: 1px solid rgba(0, 209, 255, 0.3);
   background: rgba(18, 18, 26, 0.8);
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -255,12 +255,13 @@ body {
   box-shadow: var(--border-glow);
 }
 
-/* 游戏列表网格 */
+/* 游戏列表网格（修复版，确保显示） */
 .hw-game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
   padding: 50px 0;
+  min-height: 400px;
 }
 
 .game-card {
@@ -298,7 +299,7 @@ body {
 
 .game-cover {
   width: 100%;
-  height: 170px;
+  height: 180px;
   object-fit: cover;
   border-bottom: 1px solid rgba(168, 47, 252, 0.2);
 }
@@ -312,6 +313,7 @@ body {
   font-weight: 700;
   margin-bottom: 10px;
   color: var(--text-primary);
+  line-height: 1.4;
 }
 
 .game-type {
@@ -361,7 +363,7 @@ body {
 }
 
 .footer-logo {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 900;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
@@ -388,7 +390,7 @@ body {
 }
 
 .footer-links a:hover {
-  颜色: var(--accent-blue);
+  color: var(--accent-blue);
 }
 
 /* 响应式适配 */
@@ -416,4 +418,10 @@ body {
     right: auto;
     left: 0;
   }
+}
+
+/* 弹窗动画 */
+@keyframes淡入{
+  从 { 透明度: 0; }
+  到 { 透明度: 1; }
 }

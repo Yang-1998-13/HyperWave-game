@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>游戏详情</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
+:root{--bg:#0b0b12;--card:#141420;--text:#fff;--gray:#aaa;--blue:#00d1ff;--purple:#9d00ff;--g:linear-gradient(90deg,#00d1ff,#9d00ff)}
+body{background:var(--bg);color:var(--text);padding:20px}
+.container{max-width:800px;margin:0 auto}
+.back{display:inline-block;color:#fff;background:#1a1a2a;padding:8px 14px;border-radius:8px;text-decoration:none;margin-bottom:20px}
+.cover{width:100%;border-radius:12px;margin-bottom:20px}
+.title{font-size:22px;margin-bottom:10px}
+.type{background:#1a1a2a;color:#8cf;padding:4px 10px;border-radius:8px;font-size:14px;margin-bottom:20px}
+.desc{line-height:1.8;color:var(--gray);margin-bottom:30px}
+.download{display:block;background:var(--g);color:#fff;text-align:center;padding:16px;border-radius:12px;text-decoration:none;font-size:16px}
+</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">← 返回首页</a>
+<img class="cover" id="cover">
+<div class="title" id="title"></div>
+<div class="type" id="type"></div>
+<div class="desc" id="desc"></div>
+<a class="download" id="down" target="_blank">立即下载</a>
+</div>
+<script>
+const games = [
+{"id":1,"title":"与你在一起 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/yuniyiqizai/400/220","desc":"主角James接手民宿，寻找失踪哥哥，并与美丽房客发展感情的3D开放世界恋爱养成游戏。","download":"https://pan.quark.cn/s/83852767b0b5"},
+{"id":2,"title":"游戏常用运行库合集","type":"工具","cover":"https://picsum.photos/seed/runtime/400/220","desc":"游戏必备运行库一键安装包，解决缺少dll、无法启动等90%问题。","download":"https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G"},
+{"id":3,"title":"浣熊推币机 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/raccooncoin/400/220","desc":"推币机 + 肉鸽卡组构建，150种道具，6名角色，超爽解压。","download":"https://pan.quark.cn/s/0624ed9c4b96"},
+{"id":4,"title":"灰烬之国 免安装中文版","type":"动作","cover":"https://picsum.photos/seed/cinderia/400/220","desc":"黑暗童话风Roguelite动作游戏，4角色+180技能，爽感战斗。","download":"https://pan.quark.cn/s/dc61e6bca6a5"},
+{"id":5,"title":"被勒索的主播 免安装中文版","type":"恐怖","cover":"https://picsum.photos/seed/hackedstreamer/400/220","desc":"真人演出互动电影，50+决策点，5种结局，悬疑窒息。","download":"https://pan.quark.cn/s/b6490b0fad4e"},
+{"id":6,"title":"太空中的妈妈被盗 免费下载","type":"冒险","cover":"https://picsum.photos/seed/spacemom/400/220","desc":"太空探索解谜，寻找妈妈与朋友，剧情向冒险。","download":"https://pan.quark.cn/s/a63341762d27"},
+{"id":7,"title":"钢铁雄心4 免费下载","type":"动作","cover":"https://picsum.photos/seed/hoi4/400/220","desc":"二战史诗级战略游戏，含全DLC，历史由你改写。","download":"https://pan.quark.cn/s/f995c036371a"},
+{"id":8,"title":"边境检察官 免费下载","type":"休闲","cover":"https://picsum.photos/seed/border/400/220","desc":"边防检察官模拟，查证件、缉私、枪战、追缉，高压体验。","download":"https://pan.quark.cn/s/d9acffb363e8"},
+{"id":9,"title":"宗门起源 免安装中文版","type":"冒险","cover":"https://picsum.photos/seed/zongmen/400/220","desc":"开放世界修仙，建宗门、收弟子、闯江湖、抢地盘。","download":"https://pan.quark.cn/s/5d5e9b79727e"},
+{"id":10,"title":"纯白和弦（内置作弊菜单）","type":"休闲","cover":"https://picsum.photos/seed/whitechord/400/220","desc":"歌剧少女养成卡牌手游，内置作弊菜单，爽玩全内容。","download":"https://pan.quark.cn/s/25adef09202d"},
+{"id":11,"title":"饿殍：明末千里行（解锁完整版）","type":"冒险","cover":"https://picsum.photos/seed/epiao/400/220","desc":"明末黑暗剧情向AVG，双向救赎故事，全内容解锁。","download":"https://pan.quark.cn/s/9be2f2f79a24"},
+{"id":12,"title":"大富翁 1-11 合集","type":"休闲","cover":"https://picsum.photos/seed/richman/400/220","desc":"经典大富翁全系列合集，童年回忆一次性集齐。","download":"https://pan.quark.cn/s/0c0391e7919c"},
+{"id":13,"title":"千恋*万花","type":"休闲","cover":"https://picsum.photos/seed/senren/400/220","desc":"柚子社神作，和风恋爱冒险，全语音全CG。","download":"https://pan.quark.cn/s/d06c56e05433"},
+{"id":14,"title":"中国式网游","type":"休闲","cover":"https://picsum.photos/seed/chinesemmo/400/220","desc":"模拟国产网游氪金人生，超多结局，爆笑玩梗。","download":"https://pan.quark.cn/s/96047cc5daa0"},
+{"id":15,"title":"夏日美女：欧巴请和我恋爱吧！ 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/summerlove/400/220","desc":"乡村恋爱冒险，5位女主，多结局，沉浸式第一人称。","download":"https://pan.quark.cn/s/d597200fb40d?pwd=8XmX"},
+{"id":16,"title":"杀戮尖塔2 单机+联机 送修改器","type":"休闲","cover":"https://picsum.photos/seed/sts2/400/220","desc":"神作卡牌续作，单机+联机，送修改器，免安装中文版。","download":"https://pan.quark.cn/s/de756bf7a5d2"},
+{"id":17,"title":"灾后修复师 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/roadcraft/400/220","desc":"灾后重建模拟，40+工程车辆，8张地图，支持多人联机。","download":"https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV"},
+{"id":18,"title":"攀爬动物：在一起 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/climberanimal/400/220","desc":"多人跑酷闯关，1-8人联机，跌倒重来，欢乐刺激。","download":"https://pan.quark.cn/s/849049828092?pwd=Azet"},
+{"id":19,"title":"美女，请别影响我成仙 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/xiuxian/400/220","desc":"第一人称修仙，多位美女角色，多分支剧情。","download":"https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG"},
+{"id":20,"title":"死亡搁浅2：冥滩之上 免安装中文版","type":"动作","cover":"https://picsum.photos/seed/deathstranding2/400/220","desc":"小岛秀夫神作续作，PC终极版，开放世界连接玩法。","download":"https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ"},
+{"id":21,"title":"刮个爽 免安装中文版","type":"休闲","cover":"https://picsum.photos/seed/scratchy/400/220","desc":"刮刮乐减压游戏，自动挂机，财富狂飙，超上头。","download":"https://pan.quark.cn/s/09160ad8e6b7"}
+];
+const id = new URLSearchParams(location.search).get("id");
+const g = games.find(x=>x.id==id)||games[0];
+document.getElementById("cover").src=g.cover;
+document.getElementById("title").innerText=g.title;
+document.getElementById("type").innerText=g.type;
+document.getElementById("desc").innerText=g.desc;
+document.getElementById("down").href=g.download;
+document.getElementById("down").innerText="立即下载";
+document.title = g.title + " - 超波";
+</script>
+</body>
+</html>

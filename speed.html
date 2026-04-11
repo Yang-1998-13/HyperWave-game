@@ -223,14 +223,14 @@
       background: var(--accent-gradient);
       color: var(--text-primary);
       font-size: 18px;
-字体粗细：700;
-光标：指针;
-过渡：所有 0.3秒 线性;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s linear;
     }
     .speed-btn:disabled {
-背景：#333;
-光标：不允许;
-阴影：无;
+      background: #333;
+      cursor: not-allowed;
+      box-shadow: none;
     }
     .speed-btn:hover:not(:disabled) {
       transform: translateY(-3px);
@@ -243,7 +243,7 @@
   document.querySelectorAll('.dropdown-menu a').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const type = 链接.dataset.type;
+      const type = link.dataset.type;
       window.location.href = `index.html?type=${type}`;
     });
   });

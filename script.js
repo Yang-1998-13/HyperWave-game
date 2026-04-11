@@ -297,9 +297,9 @@ categoryBtns.forEach(btn => {
 // 下拉菜单联动筛选（修复版）
 // ======================
 dropdownLinks.forEach(link => {
-  链接.(“点击”, (e) => {
-    .preventDefault();
-    常量 类型 = 链接.dataset.type;
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const type = link.dataset.type;
     
     // 同步分类按钮状态
     categoryBtns.forEach(btn => {

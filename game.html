@@ -1,439 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>游戏详情 | HyperWave 超波</title>
-  <style>
-    /* 全局样式（和首页完全统一，保持科幻风格） */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    }
-
-    :root {
-      --bg-primary: #0a0a12;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a28;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --accent-blue: #00d1ff;
-      --accent-purple: #9d00ff;
-      --accent-gradient: linear-gradient(135deg, #00d1ff 0%, #9d00ff 100%);
-    }
-
-    body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      background-image: 
-        radial-gradient(circle at 20% 20%, rgba(0, 209, 255, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 20%);
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* 返回按钮（和首页风格统一） */
-    .back-btn {
-      display: inline-block;
-      padding: 10px 25px;
-      background: var(--bg-card);
-      border: 1px solid rgba(0,209,255,0.2);
-      border-radius: 30px;
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 16px;
-      margin: 20px 0;
-      transition: all 0.3s ease;
-    }
-
-    .back-btn:hover {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-    }
-
-    /* 详情卡片（和首页卡片风格统一） */
-    .game-detail-card {
-      background: var(--bg-card);
-      border-radius: 20px;
-      padding: 40px;
-      border: 1px solid rgba(0,209,255,0.3);
-      box-shadow: 0 0 40px rgba(0,209,255,0.1);
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .game-detail-cover {
-      width: 400px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    .game-detail-info {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .game-detail-title {
-      font-size: 32px;
-      font-weight: 900;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 10px;
-    }
-
-    .game-detail-type {
-      display: inline-block;
-      padding: 5px 15px;
-      background: rgba(0,209,255,0.1);
-      color: var(--accent-blue);
-      border-radius: 15px;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .game-detail-desc {
-      line-height: 1.8;
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 30px;
-    }
-
-    /* 下载按钮容器（分开展示，不同网盘不同渐变） */
-    .download-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .download-btn {
-      display: block;
-      padding: 15px 40px;
-      border-radius: 30px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 700;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0,209,255,0.5);
-    }
-
-    /* 不同网盘专属渐变 */
-    .kuake-btn {
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-    }
-
-    .baidu-btn {
-      background: linear-gradient(90deg, #4c84ff, #286afc);
-    }
-
-    .xunlei-btn {
-      background: linear-gradient(90deg, #ff6f4a, #ff3a1a);
-    }
-
-    /* 响应式适配 */
-    @media (max-width: 768px) {
-      .game-detail-cover {
-        width: 100%;
-        height: auto;
-      }
-      .game-detail-title {
-        font-size: 24px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>游戏详情</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#121212;color:#e0e0e0;font-family:PingFang SC,Microsoft YaHei,sans-serif}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.head img{width:180px;height:110px;object-fit:cover;border-radius:8px}
+.head .right h1{font-size:22px;margin-bottom:6px}
+.head .right p{color:#aaa;font-size:14px}
+.section{margin:20px 0}
+.section h2{font-size:16px;color:#fff;margin-bottom:10px;padding-left:10px;border-left:3px solid #3772e2}
+.section .content{background:#1a1a1a;padding:14px;border-radius:10px;font-size:14px;line-height:1.7;color:#ccc}
+.download{margin-top:24px}
+.download h2{margin-bottom:12px}
+.download .items{display:flex;flex-direction:column;gap:8px}
+.download a{display:block;background:#1e1e1e;color:#fff;padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px}
+.download a.blue{background:#3772e2}
+.download a.green{background:#28a745}
+.download a.orange{background:#fd7e33}
+.back{display:inline-block;margin-bottom:20px;padding:8px 12px;background:#222;color:#fff;border-radius:8px;text-decoration:none;font-size:14px}
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- 返回首页按钮 -->
-    <a href="index.html" class="back-btn">← 返回首页</a>
-
-    <!-- 游戏详情卡片 -->
-    <div class="game-detail-card" id="gameDetailCard">
-      <p style="flex: 1; text-align: center; color: var(--text-secondary);">加载中...</p>
-    </div>
-  </div>
-
-  <script>
-    // 游戏数据（和首页完全一致，保证数据同步）
-    const games = [
-      {
-        id: 1,
-        title: "与你在一起 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/yuniyiqizai/400/250",
-        desc: "主角James接手民宿，寻找失踪哥哥，并与美丽房客发展感情的3D开放世界恋爱养成游戏。",
-        kuake: "https://pan.quark.cn/s/83852767b0b5",
-        baidu: "https://pan.baidu.com/s/10VH2cS2tzbSWJlyvOLbOoA?pwd=4jre",
-        xunlei: ""
-      },
-      {
-        id: 2,
-        title: "游戏常用运行库合集",
-        type: "工具",
-        cover: "https://picsum.photos/seed/runtime/400/250",
-        desc: "游戏必备运行库一键安装包，解决缺少dll、无法启动等90%问题。",
-        kuake: "https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G",
-        baidu: "https://pan.baidu.com/s/1Tx6Z91ils2OwdMy3_oikmw?pwd=a56g",
-        xunlei: ""
-      },
-      {
-        id: 3,
-        title: "浣熊推币机 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/raccooncoin/400/250",
-        desc: "推币机 + 肉鸽卡组构建，150种道具，6名角色，超爽解压。",
-        kuake: "https://pan.quark.cn/s/0624ed9c4b96",
-        baidu: "https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh",
-        xunlei: "https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9"
-      },
-      {
-        id: 4,
-        title: "灰烬之国 免安装中文版",
-        type: "动作",
-        cover: "https://picsum.photos/seed/cinderia/400/250",
-        desc: "黑暗童话风Roguelite动作游戏，4角色+180技能，爽感战斗。",
-        kuake: "https://pan.quark.cn/s/dc61e6bca6a5",
-        baidu: "https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4",
-        xunlei: "https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub"
-      },
-      {
-        id: 5,
-        title: "被勒索的主播 免安装中文版",
-        type: "恐怖",
-        cover: "https://picsum.photos/seed/hackedstreamer/400/250",
-        desc: "真人演出互动电影，50+决策点，5种结局，悬疑窒息。",
-        kuake: "https://pan.quark.cn/s/b6490b0fad4e",
-        baidu: "https://pan.baidu.com/s/1G7r6J9n1rskhOj5NxbeV-A?pwd=ka43",
-        xunlei: ""
-      },
-      {
-        id: 6,
-        title: "太空中的妈妈被盗 免费下载",
-        type: "冒险",
-        cover: "https://picsum.photos/seed/spacemom/400/250",
-        desc: "太空探索解谜，寻找妈妈与朋友，剧情向冒险。",
-        kuake: "https://pan.quark.cn/s/a63341762d27",
-        baidu: "https://pan.baidu.com/s/1YFgYe3rxh8xrrY2crawD3g?pwd=hm36",
-        xunlei: ""
-      },
-      {
-        id: 7,
-        title: "钢铁雄心4 免费下载",
-        type: "动作",
-        cover: "https://picsum.photos/seed/hoi4/400/250",
-        desc: "二战史诗级战略游戏，含全DLC，历史由你改写。",
-        kuake: "https://pan.quark.cn/s/f995c036371a",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 8,
-        title: "边境检察官 免费下载",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/border/400/250",
-        desc: "边防检察官模拟，查证件、缉私、枪战、追缉，高压体验。",
-        kuake: "https://pan.quark.cn/s/d9acffb363e8",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 9,
-        title: "宗门起源 免安装中文版",
-        type: "冒险",
-        cover: "https://picsum.photos/seed/zongmen/400/250",
-        desc: "开放世界修仙，建宗门、收弟子、闯江湖、抢地盘。",
-        kuake: "https://pan.quark.cn/s/5d5e9b79727e",
-        baidu: "https://pan.baidu.com/s/1F5nODS8Cx8HQ-PoAXMkQ?pwd=5gjs",
-        xunlei: ""
-      },
-      {
-        id: 10,
-        title: "纯白和弦（内置作弊菜单）",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/whitechord/400/250",
-        desc: "歌剧少女养成卡牌手游，内置作弊菜单，爽玩全内容。",
-        kuake: "https://pan.quark.cn/s/25adef09202d",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 11,
-        title: "饿殍：明末千里行（解锁完整版）",
-        type: "冒险",
-        cover: "https://picsum.photos/seed/epiao/400/250",
-        desc: "明末黑暗剧情向AVG，双向救赎故事，全内容解锁。",
-        kuake: "https://pan.quark.cn/s/9be2f2f79a24",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 12,
-        title: "大富翁 1-11 合集",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/richman/400/250",
-        desc: "经典大富翁全系列合集，童年回忆一次性集齐。",
-        kuake: "https://pan.quark.cn/s/0c0391e7919c",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 13,
-        title: "千恋*万花",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/senren/400/250",
-        desc: "柚子社神作，和风恋爱冒险，全语音全CG。",
-        kuake: "https://pan.quark.cn/s/d06c56e05433",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 14,
-        title: "中国式网游",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/chinesemmo/400/250",
-        desc: "模拟国产网游氪金人生，超多结局，爆笑玩梗。",
-        kuake: "https://pan.quark.cn/s/96047cc5daa0",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 15,
-        title: "夏日美女：欧巴请和我恋爱吧！ 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/summerlove/400/250",
-        desc: "乡村恋爱冒险，5位女主，多结局，沉浸式第一人称。",
-        kuake: "https://pan.quark.cn/s/d597200fb40d?pwd=8XmX",
-        baidu: "https://pan.baidu.com/s/1P147CNhFweeKPReSxx7Q?pwd=inip",
-        xunlei: ""
-      },
-      {
-        id: 16,
-        title: "杀戮尖塔2 单机+联机 送修改器",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/sts2/400/250",
-        desc: "神作卡牌续作，单机+联机，送修改器，免安装中文版。",
-        kuake: "https://pan.quark.cn/s/de756bf7a5d2",
-        baidu: "https://pan.baidu.com/s/18kuJm9OQUV7JfjqviQzf5Q?pwd=ds2a",
-        xunlei: "https://pan.xunlei.com/s/VOoci-z0ZcV7JfjVnaBS8jvKA1?pwd=huvt"
-      },
-      {
-        id: 17,
-        title: "灾后修复师 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/roadcraft/400/250",
-        desc: "灾后重建模拟，40+工程车辆，8张地图，支持多人联机。",
-        kuake: "https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV",
-        baidu: "https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim",
-        xunlei: ""
-      },
-      {
-        id: 18,
-        title: "攀爬动物：在一起 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/climberanimal/400/250",
-        desc: "多人跑酷闯关，1-8人联机，跌倒重来，欢乐刺激。",
-        kuake: "https://pan.quark.cn/s/849049828092?pwd=Azet",
-        baidu: "https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm",
-        xunlei: "https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh"
-      },
-      {
-        id: 19,
-        title: "美女，请别影响我成仙 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/xiuxian/400/250",
-        desc: "第一人称修仙，多位美女角色，多分支剧情。",
-        kuake: "https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG",
-        baidu: "",
-        xunlei: ""
-      },
-      {
-        id: 20,
-        title: "死亡搁浅2：冥滩之上 免安装中文版",
-        type: "动作",
-        cover: "https://picsum.photos/seed/deathstranding2/400/250",
-        desc: "小岛秀夫神作续作，PC终极版，开放世界连接玩法。",
-        kuake: "https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ",
-        baidu: "https://pan.baidu.com/s/115XF1ljOkec_Ztw__4Fng?pwd=9ycg",
-        xunlei: ""
-      },
-      {
-        id: 21,
-        title: "刮个爽 免安装中文版",
-        type: "休闲",
-        cover: "https://picsum.photos/seed/scratchy/400/250",
-        desc: "刮刮乐减压游戏，自动挂机，财富狂飙，超上头。",
-        kuake: "https://pan.quark.cn/s/09160ad8e6b7",
-        baidu: "https://pan.baidu.com/s/1s0Yed9T0oXPmlxwmsJw58jg?pwd=8gtu",
-        xunlei: ""
-      }
-    ];
-
-    // 从URL获取游戏ID，找到对应游戏
-    function getGameFromUrl() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const gameId = parseInt(urlParams.get('id') || '0');
-      return games.find(g => g.id === gameId) || null;
-    }
-
-    // 渲染游戏详情
-    function renderGameDetail() {
-      const game = getGameFromUrl();
-      const card = document.getElementById("gameDetailCard");
-      
-      if (!game) {
-        card.innerHTML = '<p style="flex: 1; text-align: center; color: var(--text-secondary);">未找到该游戏的详情</p>';
-        return;
-      }
-
-      // 构建下载按钮HTML（有几个链接就生成几个，缺失自动隐藏）
-      let downloadHtml = '';
-      if (game.kuake) {
-        downloadHtml += `<a href="${game.kuake}" target="_blank" class="download-btn kuake-btn">夸克网盘下载</a>`;
-      }
-      if (game.baidu) {
-        downloadHtml += `<a href="${game.baidu}" target="_blank" class="download-btn baidu-btn">百度网盘下载</a>`;
-      }
-      if (game.xunlei) {
-        downloadHtml += `<a href="${game.xunlei}" target="_blank" class="download-btn xunlei-btn">迅雷云盘下载</a>`;
-      }
-
-      // 渲染完整卡片
-      card.innerHTML = `
-        <img src="${game.cover}" alt="${game.title}" class="game-detail-cover">
-        <div class="game-detail-info">
-          <h1 class="game-detail-title">${game.title}</h1>
-          <span class="game-detail-type">${game.type}</span>
-          <p class="game-detail-desc">${game.desc}</p>
-          <div class="download-buttons">
-            ${downloadHtml}
-          </div>
-        </div>
-      `;
-
-      // 设置页面标题
-      document.title = `${game.title} | HyperWave 超波`;
-    }
-
-    // 页面加载完成后渲染
-    window.onload = renderGameDetail;
-  </script>
+<div class="container">
+<a class="back" href="index.html">← 返回首页</a>
+<div id="detail"></div>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const data = [
+{"id":1,"name":"与你在一起 免安装中文版","cover":"https://picsum.photos/seed/game1/400/225","info":"主角James因哥哥失踪，接手民宿，一边寻找线索，一边与多位美丽房客培养感情。游戏采用全3D制作、动作捕捉、动态天气、开放世界。可互动、换装、拍照、品酒、与野兽战斗等。","config":"最低：Win7+、i7-6700、12G、GTX970\n推荐：Win7+、i7-12700、16G、RTX2060S","baidu":"https://pan.baidu.com/s/10VH2cS2tzbSWJlyvOLbOoA?pwd=4jre","quark":"https://pan.quark.cn/s/83852767b0b5"},
+{"id":2,"name":"游戏常用运行库合集","cover":"https://picsum.photos/seed/game2/400/225","info":"一站式安装游戏必备运行库：VC++ 2002-2026、.NET等，自动适配系统，无捆绑，支持静默安装，解决游戏启动失败、缺少dll问题。","config":"全Windows系统兼容","baidu":"https://pan.baidu.com/s/1Tx6Z91ils2OwdMy3_oikmw?pwd=a56g","quark":"https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G"},
+{"id":3,"name":"浣熊推币机 免安装中文版","cover":"https://picsum.photos/seed/game3/400/225","info":"推币机+肉鸽。组合代币触发联动，150种道具，6名角色，无尽模式，8难度，爽感解压。","config":"最低：Win10、i5-7500、8G、GTX1060\n推荐：Win10、i5、8G、RTX2060","quark":"https://pan.quark.cn/s/0624ed9c4b96","baidu":"https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh","xunlei":"https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9"},
+{"id":4,"name":"灰烬之国 免安装中文版","cover":"https://picsum.photos/seed/game4/400/225","info":"黑暗童话Roguelite动作游戏。4角色，180+技能，130+装备，随机地图，黑魔卡构筑。","config":"最低：Win10、i5-12600KF、16G、GTX1060","quark":"https://pan.quark.cn/s/dc61e6bca6a5","baidu":"https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4","xunlei":"https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub"},
+{"id":5,"name":"被勒索的主播 免安装中文版","cover":"https://picsum.photos/seed/game5/400/225","info":"真人演出互动电影，50+关键选择，5结局，搜查、QTE、回溯记忆，沉浸式悬疑。","config":"最低：Win7x64、2GHz、4G、DX11、20G\n推荐：Win10x64、2.2GHz、8G、20G","quark":"https://pan.quark.cn/s/b6490b0fad4e","baidu":"https://pan.baidu.com/s/1G7r6J9n1rskhOj5NxbeV-A?pwd=ka43"},
+{"id":6,"name":"太空中的妈妈被盗 免费下载","cover":"https://picsum.photos/seed/game6/400/225","info":"太空解谜冒险。探索废弃殖民地，找妈妈与朋友，修复机器、解谜、收集线索，多结局。","config":"大小：300MB，版本v1.4","quark":"https://pan.quark.cn/s/a63341762d27","baidu":"https://pan.baidu.com/s/1YFgYe3rxh8xrrY2crawD3g?pwd=hm36"},
+{"id":7,"name":"钢铁雄心4 免费下载","cover":"https://picsum.photos/seed/game7/400/225","info":"二战战略，指挥国家，工业、外交、战争。含4个DLC：死亡或耻辱、携手共赴胜利、唤醒猛虎、操炮手。","config":"大小：6.3GB，版本v1.17.3","quark":"https://pan.quark.cn/s/f995c036371a"},
+{"id":8,"name":"边境检察官 免费下载","cover":"https://picsum.photos/seed/game8/400/225","info":"1981年边防检查。查证、缉私、枪战、追捕、管理哨所、特殊任务。剧情向。","config":"大小：9GB，版本v10162025","quark":"https://pan.quark.cn/s/d9acffb363e8"},
+{"id":9,"name":"宗门起源 免安装中文版","cover":"https://picsum.photos/seed/game9/400/225","info":"开放世界修仙。探索、采集、建设门派、培养弟子、武学、实战、攻防、江湖势力。","config":"最低：Win7x64、8G、RTX2060\n推荐：Win10x64、16G、RTX4060","baidu":"https://pan.baidu.com/s/1F5nODS8Cx8sEHQ-PoAXMkQ?pwd=5gjs","quark":"https://pan.quark.cn/s/5d5e9b79727e"},
+{"id":10,"name":"纯白和弦（内置作弊菜单）","cover":"https://picsum.photos/seed/game10/400/225","info":"歌剧少女养成卡牌手游，即时对战，roguelike，策略养成。","config":"安卓APK","quark":"https://pan.quark.cn/s/25adef09202d"},
+{"id":11,"name":"饿殍：明末千里行（解锁完整版）","cover":"https://picsum.photos/seed/game11/400/225","info":"明末文字冒险，盗匪送少女，查明真相，双向救赎，黑暗但正向。","config":"安卓APK","quark":"https://pan.quark.cn/s/9be2f2f79a24"},
+{"id":12,"name":"大富翁 1-11 合集","cover":"https://picsum.photos/seed/game12/400/225","info":"经典大富翁1-11全系列，地产、卡片、竞技、休闲。","config":"最低：Win7x64、i3、8G、GTX950、5G","quark":"https://pan.quark.cn/s/0c0391e7919c"},
+{"id":13,"name":"千恋*万花 免安装中文版","cover":"https://picsum.photos/seed/game13/400/225","info":"柚子社名作，和风恋爱冒险，多结局，获奖无数。","config":"最低：Win7、Core2Duo 2.4G、2G、256M、10G","quark":"https://pan.quark.cn/s/d06c56e05433"},
+{"id":14,"name":"中国式网游 免安装中文版","cover":"https://picsum.photos/seed/game14/400/225","info":"模拟国产网游氪金，多结局，怀旧梗多，单机体验氪金爽感。","config":"最低：Win10、i5-6500、8G、GTX660、5G\n推荐：Win10、i5-10400、16G、GTX1060","quark":"https://pan.quark.cn/s/96047cc5daa0"},
+{"id":15,"name":"夏日美女：欧巴请和我恋爱吧！","cover":"https://picsum.photos/seed/game15/400/225","info":"乡村恋爱冒险，5位女主，第一视角，多分支，CG丰富。","config":"最低：Win10、i3、4G、独显、40G","quark":"https://pan.quark.cn/s/d597200fb40d?pwd=8XmX","baidu":"https://pan.baidu.com/s/1P147U7CNhFweeKPReSxx7Q?pwd=inip"},
+{"id":16,"name":"杀戮尖塔2 单机+联机 送修改器","cover":"https://picsum.photos/seed/game16/400/225","info":"卡牌肉鸽续作，新卡新怪物，支持4人联机，团队连携。","config":"最低：Win10、2GHz、4G、DX12、4G","quark":"https://pan.quark.cn/s/de756bf7a5d2","baidu":"https://pan.baidu.com/s/18kuJm9OQUV3d4qviQzfP5Q?pwd=ds2a","xunlei":"https://pan.xunlei.com/s/VOoci-z0ZcV7JfjVnaBS8jvKA1?pwd=huvt"},
+{"id":17,"name":"灾后修复师 免安装中文版","cover":"https://picsum.photos/seed/game17/400/225","info":"灾后重建模拟，40+工程车，8地图，可合作模式。","config":"最低：Win10、Ryzen5、8G、RX590/GTX1060、40G","quark":"https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV","baidu":"https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim"},
+{"id":18,"name":"攀爬动物：在一起 免安装中文版","cover":"https://picsum.photos/seed/game18/400/225","info":"多人跑酷闯关，跌倒重来，合作对抗，障碍刺激。","config":"最低：Win10、i5、8G、2G、500M","quark":"https://pan.quark.cn/s/849049828092?pwd=Azet","baidu":"https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm","xunlei":"https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh"},
+{"id":19,"name":"美女，请别影响我成仙","cover":"https://picsum.photos/seed/game19/400/225","info":"第一人称修仙，多位美女角色，QTE渡劫，多结局修罗场。","config":"最低：Win10、i3、4G、独显、25G","quark":"https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG"},
+{"id":20,"name":"死亡搁浅2：冥滩之上 中文版","cover":"https://picsum.photos/seed/game20/400/225","info":"小岛秀夫开放世界，连接、配送、战斗、探索，PC终极版。","config":"最低：Win10、i3-10100、16G、GTX1660、150G","quark":"https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ","baidu":"https://pan.baidu.com/s/115XFfRljOkec_Ztw__4Fng?pwd=9ycg"},
+{"id":21,"name":"刮个爽 免安装中文版","cover":"https://picsum.photos/seed/game21/400/225","info":"刮刮乐解压，自动挂机，永久升级，中奖、稀有彩票、转生。","config":"休闲轻度","quark":"https://pan.quark.cn/s/09160ad8e6b7","baidu":"https://pan.baidu.com/s/1s0YedT0oXPmlxwmsJw58jg?pwd=8gtu"}
+];
+const g = data.find(x=>x.id==id) || data[0];
+const dom = document.getElementById('detail');
+dom.innerHTML = `
+<div class="head">
+<img src="${g.cover}">
+<div class="right">
+<h1>${g.name}</h1>
+<p>免安装中文版</p>
+</div>
+</div>
+<div class="section">
+<h2>游戏介绍</h2>
+<div class="content">${g.info||'暂无介绍'}</div>
+</div>
+<div class="section">
+<h2>系统配置</h2>
+<div class="content">${g.config||'暂无配置'}</div>
+</div>
+<div class="download">
+<h2>下载地址</h2>
+<div class="items">
+${g.quark?`<a href="${g.quark}" class="blue" target="_blank">📦 夸克网盘</a>`:''}
+${g.baidu?`<a href="${g.baidu}" class="green" target="_blank">📁 百度网盘</a>`:''}
+${g.xunlei?`<a href="${g.xunlei}" class="orange" target="_blank">⚡ 迅雷云盘</a>`:''}
+</div>
+</div>`;
+</script>
 </body>
 </html>

@@ -1,229 +1,803 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HyperWave 超波 | 游戏资源空间站</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
-:root{--bg:#0b0b12;--card:#141420;--text:#fff;--gray:#aaa;--blue:#00d1ff;--purple:#9d00ff;--g:linear-gradient(90deg,#00d1ff,#9d00ff)}
-body{background:var(--bg);color:var(--text)}
-.container{max-width:1100px;margin:0 auto;padding:0 20px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #222}
-.logo{font-size:24px;font-weight:700;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-.nav{display:flex;gap:20px}
-.nav a{color:#fff;text-decoration:none}
-.hero{text-align:center;padding:50px 0 30px}
-.hero h1{font-size:32px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--gray)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.item{background:var(--card);border-radius:12px;overflow:hidden}
-.item img{width:100%;height:170px;object-fit:cover}
-.info{padding:14px}
-.title{font-size:15px;margin-bottom:6px}
-.type{display:inline-block;background:#1a1a2a;color:#8cf;padding:3px 8px;border-radius:6px;font-size:12px;margin-bottom:10px}
-.btn{display:block;background:var(--g);color:#fff;text-align:center;padding:10px;border-radius:8px;text-decoration:none}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HyperWave 超波 | 游戏资源空间站</title>
+  <style>
+    /* 全局样式重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    /* 自定义CSS变量（科幻蓝紫渐变主题，完全还原最初样式） */
+    :root {
+      --bg-primary: #0a0a12;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a28;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-blue: #00d1ff;
+      --accent-purple: #9d00ff;
+      --accent-gradient: linear-gradient(135deg, #00d1ff 0%, #9d00ff 100%);
+    }
+
+    /* 页面基础样式 */
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 209, 255, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 20%);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 头部导航样式（完全还原最初） */
+    .hw-header {
+      background-color: rgba(10, 10, 18, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .hw-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 900;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-blue);
+    }
+
+    .nav-link.active {
+      color: var(--accent-blue);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    /* 下拉菜单样式 */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--bg-card);
+      border: 1px solid rgba(0, 209, 255, 0.3);
+      border-radius: 10px;
+      padding: 10px 0;
+      min-width: 150px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: rgba(0, 209, 255, 0.1);
+      color: var(--accent-blue);
+      padding-left: 25px;
+    }
+
+    /* 英雄区样式（完全还原最初） */
+    .hw-hero {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 64px;
+      font-weight: 900;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-desc {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .hero-search {
+      display: flex;
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-search input {
+      flex: 1;
+      padding: 15px 20px;
+      background-color: var(--bg-card);
+      border: 1px solid rgba(0, 209, 255, 0.3);
+      border-radius: 30px;
+      color: var(--text-primary);
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .hero-search input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(0, 209, 255, 0.2);
+    }
+
+    .search-btn {
+      padding: 15px 30px;
+      background: var(--accent-gradient);
+      border: none;
+      border-radius: 30px;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(0, 209, 255, 0.4);
+    }
+
+    /* 分类导航样式（完全还原最初） */
+    .hw-category {
+      padding: 20px 0;
+      border-top: 1px solid rgba(0, 209, 255, 0.1);
+      border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .hw-category .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .category-btn {
+      padding: 10px 25px;
+      background-color: var(--bg-card);
+      border: 1px solid rgba(0, 209, 255, 0.2);
+      border-radius: 30px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    .category-btn.active {
+      background: var(--accent-gradient);
+      border-color: transparent;
+      color: var(--text-primary);
+    }
+
+    /* 游戏列表网格样式（完全还原最初） */
+    .hw-game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 20px 0 80px;
+    }
+
+    .game-card {
+      background-color: var(--bg-card);
+      border: 1px solid rgba(0, 209, 255, 0.2);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 15px 30px rgba(0, 209, 255, 0.2);
+    }
+
+    .game-cover {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+    }
+
+    .game-info {
+      padding: 20px;
+    }
+
+    .game-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .game-type {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: rgba(0, 209, 255, 0.1);
+      border-radius: 20px;
+      color: var(--accent-blue);
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .detail-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent-gradient);
+      border: none;
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .detail-btn:hover {
+      box-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
+    }
+
+    /* 底部样式（完全还原最初） */
+    .hw-footer {
+      background-color: var(--bg-secondary);
+      border-top: 1px solid rgba(0, 209, 255, 0.2);
+      padding: 40px 0;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 900;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+    }
+
+    .footer-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-blue);
+    }
+
+    /* 动画定义 */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* 响应式适配 */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-desc {
+        font-size: 16px;
+      }
+      .nav-menu {
+        gap: 15px;
+      }
+      .logo-text {
+        font-size: 20px;
+      }
+      .logo-sub {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-search {
+        flex-direction: column;
+      }
+      .nav-menu {
+        gap: 10px;
+      }
+      .nav-link {
+        font-size: 14px;
+      }
+      .hw-game-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-<div class="header">
-<div class="logo">HyperWave 超波</div>
-<div class="nav"><a href="index.html">首页</a><a href="about.html">关于我们</a></div>
-</div>
-<div class="hero">
-<h1>游戏资源空间站</h1>
-<p>免安装 / 中文版 / 高速下载</p>
-</div>
-<div class="grid" id="list"></div>
-</div>
+
+<!-- 顶部导航栏（带渐变LOGO，完全还原最初） -->
+<header class="hw-header">
+  <div class="container">
+    <div class="logo">
+      <span class="logo-text">HYPERWAVE</span>
+      <span class="logo-sub">超波</span>
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link active">首页</a>
+      <a href="speed.html" class="nav-link">网速测试</a>
+      <div class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">资源分类</a>
+        <div class="dropdown-menu">
+          <a href="#" data-type="all">全部资源</a>
+          <a href="#" data-type="动作">动作</a>
+          <a href="#" data-type="冒险">冒险</a>
+          <a href="#" data-type="射击">射击</a>
+          <a href="#" data-type="休闲">休闲</a>
+          <a href="#" data-type="体育">体育</a>
+          <a href="#" data-type="竞速">竞速</a>
+          <a href="#" data-type="恐怖">恐怖</a>
+        </div>
+      </div>
+      <a href="about.html" class="nav-link">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 英雄区（中间大LOGO，完全还原最初） -->
+<section class="hw-hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">HyperWave 超波</h1>
+      <p class="hero-desc">探索无限游戏宇宙，获取最新资源、MOD与补丁</p>
+      <div class="hero-search">
+        <input type="text" id="search" placeholder="搜索游戏 / MOD / 补丁...">
+        <button class="search-btn">🔍 搜索</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 分类导航（完全还原最初） -->
+<section class="hw-category">
+  <div class="container">
+    <button class="category-btn active" data-type="all">全部资源</button>
+    <button class="category-btn" data-type="动作">动作</button>
+    <button class="category-btn" data-type="冒险">冒险</button>
+    <button class="category-btn" data-type="射击">射击</button>
+    <button class="category-btn" data-type="休闲">休闲</button>
+    <button class="category-btn" data-type="体育">体育</button>
+    <button class="category-btn" data-type="竞速">竞速</button>
+    <button class="category-btn" data-type="恐怖">恐怖</button>
+  </div>
+</section>
+
+<!-- 游戏资源列表（完全还原最初样式，数据匹配你文档） -->
+<main class="container">
+  <div class="hw-game-grid" id="gameList"></div>
+</main>
+
+<!-- 底部（完全还原最初） -->
+<footer class="hw-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">HYPERWAVE 超波</div>
+      <p class="footer-desc">© 2025 HyperWave 超波 | 仅供学习交流使用，禁止商用</p>
+      <div class="footer-links">
+        <a href="#">隐私政策</a>
+        <a href="#">使用条款</a>
+        <a href="about.html">联系我们</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script>
+// 游戏数据（完全匹配你文档，有几个网盘链接就显示几个，缺失自动隐藏）
 const games = [
-{
-id:1,title:"与你在一起 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/yuniyiqizai/400/220",
-desc:"主角James接手民宿，寻找失踪哥哥，并与美丽房客发展感情的3D开放世界恋爱养成游戏。",
-kuake:"https://pan.quark.cn/s/83852767b0b5",
-baidu:"https://pan.baidu.com/s/10VH2cS2tzbSWJlyvOLbOoA?pwd=4jre",
-xunlei:""
-},
-{
-id:2,title:"游戏常用运行库合集",type:"工具",
-cover:"https://picsum.photos/seed/runtime/400/220",
-desc:"游戏必备运行库一键安装包，解决缺少dll、无法启动等90%问题。",
-kuake:"https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G",
-baidu:"https://pan.baidu.com/s/1Tx6Z91ils2OwdMy3_oikmw?pwd=a56g",
-xunlei:""
-},
-{
-id:3,title:"浣熊推币机 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/raccooncoin/400/220",
-desc:"推币机 + 肉鸽卡组构建，150种道具，6名角色，超爽解压。",
-kuake:"https://pan.quark.cn/s/0624ed9c4b96",
-baidu:"https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh",
-xunlei:"https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9"
-},
-{
-id:4,title:"灰烬之国 免安装中文版",type:"动作",
-cover:"https://picsum.photos/seed/cinderia/400/220",
-desc:"黑暗童话风Roguelite动作游戏，4角色+180技能，爽感战斗。",
-kuake:"https://pan.quark.cn/s/dc61e6bca6a5",
-baidu:"https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4",
-xunlei:"https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub"
-},
-{
-id:5,title:"被勒索的主播 免安装中文版",type:"恐怖",
-cover:"https://picsum.photos/seed/hackedstreamer/400/220",
-desc:"真人演出互动电影，50+决策点，5种结局，悬疑窒息。",
-kuake:"https://pan.quark.cn/s/b6490b0fad4e",
-baidu:"https://pan.baidu.com/s/1G7r6J9n1rskhOj5NxbeV-A?pwd=ka43",
-xunlei:""
-},
-{
-id:6,title:"太空中的妈妈被盗 免费下载",type:"冒险",
-cover:"https://picsum.photos/seed/spacemom/400/220",
-desc:"太空探索解谜，寻找妈妈与朋友，剧情向冒险。",
-kuake:"https://pan.quark.cn/s/a63341762d27",
-baidu:"https://pan.baidu.com/s/1YFgYe3rxh8xrrY2crawD3g?pwd=hm36",
-xunlei:""
-},
-{
-id:7,title:"钢铁雄心4 免费下载",type:"动作",
-cover:"https://picsum.photos/seed/hoi4/400/220",
-desc:"二战史诗级战略游戏，含全DLC，历史由你改写。",
-kuake:"https://pan.quark.cn/s/f995c036371a",
-baidu:"",
-xunlei:""
-},
-{
-id:8,title:"边境检察官 免费下载",type:"休闲",
-cover:"https://picsum.photos/seed/border/400/220",
-desc:"边防检察官模拟，查证件、缉私、枪战、追缉，高压体验。",
-kuake:"https://pan.quark.cn/s/d9acffb363e8",
-baidu:"",
-xunlei:""
-},
-{
-id:9,title:"宗门起源 免安装中文版",type:"冒险",
-cover:"https://picsum.photos/seed/zongmen/400/220",
-desc:"开放世界修仙，建宗门、收弟子、闯江湖、抢地盘。",
-kuake:"https://pan.quark.cn/s/5d5e9b79727e",
-baidu:"https://pan.baidu.com/s/1F5nODS8Cx8HQ-PoAXMkQ?pwd=5gjs",
-xunlei:""
-},
-{
-id:10,title:"纯白和弦（内置作弊菜单）",type:"休闲",
-cover:"https://picsum.photos/seed/whitechord/400/220",
-desc:"歌剧少女养成卡牌手游，内置作弊菜单，爽玩全内容。",
-kuake:"https://pan.quark.cn/s/25adef09202d",
-baidu:"",
-xunlei:""
-},
-{
-id:11,title:"饿殍：明末千里行（解锁完整版）",type:"冒险",
-cover:"https://picsum.photos/seed/epiao/400/220",
-desc:"明末黑暗剧情向AVG，双向救赎故事，全内容解锁。",
-kuake:"https://pan.quark.cn/s/9be2f2f79a24",
-baidu:"",
-xunlei:""
-},
-{
-id:12,title:"大富翁 1-11 合集",type:"休闲",
-cover:"https://picsum.photos/seed/richman/400/220",
-desc:"经典大富翁全系列合集，童年回忆一次性集齐。",
-kuake:"https://pan.quark.cn/s/0c0391e7919c",
-baidu:"",
-xunlei:""
-},
-{
-id:13,title:"千恋*万花",type:"休闲",
-cover:"https://picsum.photos/seed/senren/400/220",
-desc:"柚子社神作，和风恋爱冒险，全语音全CG。",
-kuake:"https://pan.quark.cn/s/d06c56e05433",
-baidu:"",
-xunlei:""
-},
-{
-id:14,title:"中国式网游",type:"休闲",
-cover:"https://picsum.photos/seed/chinesemmo/400/220",
-desc:"模拟国产网游氪金人生，超多结局，爆笑玩梗。",
-kuake:"https://pan.quark.cn/s/96047cc5daa0",
-baidu:"",
-xunlei:""
-},
-{
-id:15,title:"夏日美女：欧巴请和我恋爱吧！ 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/summerlove/400/220",
-desc:"乡村恋爱冒险，5位女主，多结局，沉浸式第一人称。",
-kuake:"https://pan.quark.cn/s/d597200fb40d?pwd=8XmX",
-baidu:"https://pan.baidu.com/s/1P147CNhFweeKPReSxx7Q?pwd=inip",
-xunlei:""
-},
-{
-id:16,title:"杀戮尖塔2 单机+联机 送修改器",type:"休闲",
-cover:"https://picsum.photos/seed/sts2/400/220",
-desc:"神作卡牌续作，单机+联机，送修改器，免安装中文版。",
-kuake:"https://pan.quark.cn/s/de756bf7a5d2",
-baidu:"https://pan.baidu.com/s/18kuJm9OQUV7JfjqviQzf5Q?pwd=ds2a",
-xunlei:"https://pan.xunlei.com/s/VOoci-z0ZcV7JfjVnaBS8jvKA1?pwd=huvt"
-},
-{
-id:17,title:"灾后修复师 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/roadcraft/400/220",
-desc:"灾后重建模拟，40+工程车辆，8张地图，支持多人联机。",
-kuake:"https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV",
-baidu:"https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim",
-xunlei:""
-},
-{
-id:18,title:"攀爬动物：在一起 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/climberanimal/400/220",
-desc:"多人跑酷闯关，1-8人联机，跌倒重来，欢乐刺激。",
-kuake:"https://pan.quark.cn/s/849049828092?pwd=Azet",
-baidu:"https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm",
-xunlei:"https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh"
-},
-{
-id:19,title:"美女，请别影响我成仙 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/xiuxian/400/220",
-desc:"第一人称修仙，多位美女角色，多分支剧情。",
-kuake:"https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG",
-baidu:"",
-xunlei:""
-},
-{
-id:20,title:"死亡搁浅2：冥滩之上 免安装中文版",type:"动作",
-cover:"https://picsum.photos/seed/deathstranding2/400/220",
-desc:"小岛秀夫神作续作，PC终极版，开放世界连接玩法。",
-kuake:"https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ",
-baidu:"https://pan.baidu.com/s/115XF1ljOkec_Ztw__4Fng?pwd=9ycg",
-xunlei:""
-},
-{
-id:21,title:"刮个爽 免安装中文版",type:"休闲",
-cover:"https://picsum.photos/seed/scratchy/400/220",
-desc:"刮刮乐减压游戏，自动挂机，财富狂飙，超上头。",
-kuake:"https://pan.quark.cn/s/09160ad8e6b7",
-baidu:"https://pan.baidu.com/s/1s0Yed9T0oXPmlxwmsJw58jg?pwd=8gtu",
-xunlei:""
-}
+  {
+    id: 1,
+    title: "与你在一起 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/yuniyiqizai/400/250",
+    desc: "主角James接手民宿，寻找失踪哥哥，并与美丽房客发展感情的3D开放世界恋爱养成游戏。",
+    kuake: "https://pan.quark.cn/s/83852767b0b5",
+    baidu: "https://pan.baidu.com/s/10VH2cS2tzbSWJlyvOLbOoA?pwd=4jre",
+    xunlei: ""
+  },
+  {
+    id: 2,
+    title: "游戏常用运行库合集",
+    type: "工具",
+    cover: "https://picsum.photos/seed/runtime/400/250",
+    desc: "游戏必备运行库一键安装包，解决缺少dll、无法启动等90%问题。",
+    kuake: "https://pan.quark.cn/s/4f7f78309de2?pwd=BU5G",
+    baidu: "https://pan.baidu.com/s/1Tx6Z91ils2OwdMy3_oikmw?pwd=a56g",
+    xunlei: ""
+  },
+  {
+    id: 3,
+    title: "浣熊推币机 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/raccooncoin/400/250",
+    desc: "推币机 + 肉鸽卡组构建，150种道具，6名角色，超爽解压。",
+    kuake: "https://pan.quark.cn/s/0624ed9c4b96",
+    baidu: "https://pan.baidu.com/s/1TAGSt1XbPN7W32o3Grx8aw?pwd=5ijh",
+    xunlei: "https://pan.xunlei.com/s/VOpp-UpnAxXVDI_iktjDIwdBA1?pwd=g3n9"
+  },
+  {
+    id: 4,
+    title: "灰烬之国 免安装中文版",
+    type: "动作",
+    cover: "https://picsum.photos/seed/cinderia/400/250",
+    desc: "黑暗童话风Roguelite动作游戏，4角色+180技能，爽感战斗。",
+    kuake: "https://pan.quark.cn/s/dc61e6bca6a5",
+    baidu: "https://pan.baidu.com/s/13sP07opjTxYqO5YqL94J_g?pwd=jnv4",
+    xunlei: "https://pan.xunlei.com/s/VOpp0AIAND0feDD6AYYWAm0AA1?pwd=kkub"
+  },
+  {
+    id: 5,
+    title: "被勒索的主播 免安装中文版",
+    type: "恐怖",
+    cover: "https://picsum.photos/seed/hackedstreamer/400/250",
+    desc: "真人演出互动电影，50+决策点，5种结局，悬疑窒息。",
+    kuake: "https://pan.quark.cn/s/b6490b0fad4e",
+    baidu: "https://pan.baidu.com/s/1G7r6J9n1rskhOj5NxbeV-A?pwd=ka43",
+    xunlei: ""
+  },
+  {
+    id: 6,
+    title: "太空中的妈妈被盗 免费下载",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/spacemom/400/250",
+    desc: "太空探索解谜，寻找妈妈与朋友，剧情向冒险。",
+    kuake: "https://pan.quark.cn/s/a63341762d27",
+    baidu: "https://pan.baidu.com/s/1YFgYe3rxh8xrrY2crawD3g?pwd=hm36",
+    xunlei: ""
+  },
+  {
+    id: 7,
+    title: "钢铁雄心4 免费下载",
+    type: "动作",
+    cover: "https://picsum.photos/seed/hoi4/400/250",
+    desc: "二战史诗级战略游戏，含全DLC，历史由你改写。",
+    kuake: "https://pan.quark.cn/s/f995c036371a",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 8,
+    title: "边境检察官 免费下载",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/border/400/250",
+    desc: "边防检察官模拟，查证件、缉私、枪战、追缉，高压体验。",
+    kuake: "https://pan.quark.cn/s/d9acffb363e8",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 9,
+    title: "宗门起源 免安装中文版",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/zongmen/400/250",
+    desc: "开放世界修仙，建宗门、收弟子、闯江湖、抢地盘。",
+    kuake: "https://pan.quark.cn/s/5d5e9b79727e",
+    baidu: "https://pan.baidu.com/s/1F5nODS8Cx8HQ-PoAXMkQ?pwd=5gjs",
+    xunlei: ""
+  },
+  {
+    id: 10,
+    title: "纯白和弦（内置作弊菜单）",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/whitechord/400/250",
+    desc: "歌剧少女养成卡牌手游，内置作弊菜单，爽玩全内容。",
+    kuake: "https://pan.quark.cn/s/25adef09202d",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 11,
+    title: "饿殍：明末千里行（解锁完整版）",
+    type: "冒险",
+    cover: "https://picsum.photos/seed/epiao/400/250",
+    desc: "明末黑暗剧情向AVG，双向救赎故事，全内容解锁。",
+    kuake: "https://pan.quark.cn/s/9be2f2f79a24",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 12,
+    title: "大富翁 1-11 合集",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/richman/400/250",
+    desc: "经典大富翁全系列合集，童年回忆一次性集齐。",
+    kuake: "https://pan.quark.cn/s/0c0391e7919c",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 13,
+    title: "千恋*万花",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/senren/400/250",
+    desc: "柚子社神作，和风恋爱冒险，全语音全CG。",
+    kuake: "https://pan.quark.cn/s/d06c56e05433",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 14,
+    title: "中国式网游",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/chinesemmo/400/250",
+    desc: "模拟国产网游氪金人生，超多结局，爆笑玩梗。",
+    kuake: "https://pan.quark.cn/s/96047cc5daa0",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 15,
+    title: "夏日美女：欧巴请和我恋爱吧！ 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/summerlove/400/250",
+    desc: "乡村恋爱冒险，5位女主，多结局，沉浸式第一人称。",
+    kuake: "https://pan.quark.cn/s/d597200fb40d?pwd=8XmX",
+    baidu: "https://pan.baidu.com/s/1P147CNhFweeKPReSxx7Q?pwd=inip",
+    xunlei: ""
+  },
+  {
+    id: 16,
+    title: "杀戮尖塔2 单机+联机 送修改器",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/sts2/400/250",
+    desc: "神作卡牌续作，单机+联机，送修改器，免安装中文版。",
+    kuake: "https://pan.quark.cn/s/de756bf7a5d2",
+    baidu: "https://pan.baidu.com/s/18kuJm9OQUV7JfjqviQzf5Q?pwd=ds2a",
+    xunlei: "https://pan.xunlei.com/s/VOoci-z0ZcV7JfjVnaBS8jvKA1?pwd=huvt"
+  },
+  {
+    id: 17,
+    title: "灾后修复师 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/roadcraft/400/250",
+    desc: "灾后重建模拟，40+工程车辆，8张地图，支持多人联机。",
+    kuake: "https://pan.quark.cn/s/d6eac4483e7d?pwd=P5sV",
+    baidu: "https://pan.baidu.com/s/1_lPzcvDI8O5J2HVC-ON8yQ?pwd=qkim",
+    xunlei: ""
+  },
+  {
+    id: 18,
+    title: "攀爬动物：在一起 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/climberanimal/400/250",
+    desc: "多人跑酷闯关，1-8人联机，跌倒重来，欢乐刺激。",
+    kuake: "https://pan.quark.cn/s/849049828092?pwd=Azet",
+    baidu: "https://pan.baidu.com/s/1Uu3wz_KfMYel7CFxqY2S1A?pwd=cmcm",
+    xunlei: "https://pan.xunlei.com/s/VOoc65uq951lMoP1kyoghO82A1?pwd=4yhh"
+  },
+  {
+    id: 19,
+    title: "美女，请别影响我成仙 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/xiuxian/400/250",
+    desc: "第一人称修仙，多位美女角色，多分支剧情。",
+    kuake: "https://pan.quark.cn/s/f51d2012a0be?pwd=e2PG",
+    baidu: "",
+    xunlei: ""
+  },
+  {
+    id: 20,
+    title: "死亡搁浅2：冥滩之上 免安装中文版",
+    type: "动作",
+    cover: "https://picsum.photos/seed/deathstranding2/400/250",
+    desc: "小岛秀夫神作续作，PC终极版，开放世界连接玩法。",
+    kuake: "https://pan.quark.cn/s/f7e76ad59970?pwd=XdgQ",
+    baidu: "https://pan.baidu.com/s/115XF1ljOkec_Ztw__4Fng?pwd=9ycg",
+    xunlei: ""
+  },
+  {
+    id: 21,
+    title: "刮个爽 免安装中文版",
+    type: "休闲",
+    cover: "https://picsum.photos/seed/scratchy/400/250",
+    desc: "刮刮乐减压游戏，自动挂机，财富狂飙，超上头。",
+    kuake: "https://pan.quark.cn/s/09160ad8e6b7",
+    baidu: "https://pan.baidu.com/s/1s0Yed9T0oXPmlxwmsJw58jg?pwd=8gtu",
+    xunlei: ""
+  }
 ];
 
-const list = document.getElementById("list");
-games.forEach(g=>{
-let item = document.createElement("div");
-item.className = "item";
-item.innerHTML = `
-<img src="${g.cover}">
-<div class="info">
-<div class="title">${g.title}</div>
-<div class="type">${g.type}</div>
-<a class="btn" href="game.html?id=${g.id}">查看详情</a>
-</div>`;
-list.appendChild(item);
+// DOM元素获取
+const gameList = document.getElementById("gameList");
+const searchInput = document.getElementById("search");
+const categoryBtns = document.querySelectorAll(".category-btn");
+const dropdownLinks = document.querySelectorAll(".dropdown-menu a");
+
+// 渲染游戏列表（完全还原最初样式）
+function renderGameList(filteredGames) {
+  gameList.innerHTML = "";
+  if (!filteredGames || filteredGames.length === 0) {
+    gameList.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-secondary); font-size: 18px; padding: 50px 0;'>暂无相关资源</p>";
+    return;
+  }
+  filteredGames.forEach(game => {
+    const card = document.createElement("div");
+    card.className = "game-card";
+    card.innerHTML = `
+      <img src="${game.cover}" alt="${game.title}" class="game-cover" loading="lazy">
+      <div class="game-info">
+        <h3 class="game-title">${game.title}</h3>
+        <span class="game-type">${game.type}</span>
+        <a href="game.html?id=${game.id}" class="detail-btn">查看详情</a>
+      </div>
+    `;
+    gameList.appendChild(card);
+  });
+}
+
+// 搜索功能
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase().trim();
+  const filteredGames = games.filter(game => 
+    game.title.toLowerCase().includes(keyword) || 
+    game.type.toLowerCase().includes(keyword)
+  );
+  renderGameList(filteredGames);
+  
+  // 同步分类按钮状态
+  categoryBtns.forEach(btn => btn.classList.remove("active"));
+  document.querySelector('.category-btn[data-type="all"]').classList.add("active");
+});
+
+// 分类按钮筛选
+categoryBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // 重置激活状态
+    categoryBtns.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    
+    const type = btn.dataset.type;
+    const filteredGames = type === "all" ? games : games.filter(game => game.type === type);
+    renderGameList(filteredGames);
+  });
+});
+
+// 下拉菜单联动筛选
+dropdownLinks.forEach(link => {
+  链接.addEventListener("click", (e) => {
+    e.preventDefault();
+    const type = 链接.dataset.type;
+    
+    // 同步分类按钮
+    categoryBtns.forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.type === type);
+    });
+    
+    // 筛选游戏
+    const filteredGames = type === "all" ? games : games.filter(game => game.type === type);
+    renderGameList(filteredGames);
+  });
+});
+
+// 页面加载完成后初始渲染
+document.addEventListener("DOMContentLoaded", () => {
+  renderGameList(games);
 });
 </script>
+
 </body>
 </html>
